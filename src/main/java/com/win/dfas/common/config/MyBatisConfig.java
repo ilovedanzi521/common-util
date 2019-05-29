@@ -83,57 +83,37 @@ public class MyBatisConfig {
         dataSource.setUsername(env.getProperty("spring.datasource.username"));
         dataSource.setPassword(env.getProperty("spring.datasource.password"));
         //心跳检查
-        dataSource.setConnectionTestQuery(env.getProperty("spring.datasource.validationQuery"));
+        dataSource.setConnectionTestQuery(env.getProperty("spring.datasource.hikari.connection-test-query"));
         /** 配置获取连接等待超时的时间 毫秒 */
-        String maxWait = env.getProperty("spring.datasource.maxWait");
+        String maxWait = env.getProperty("spring.datasource.hikari.connection-timeout");
         if (StringUtils.isNotBlank(maxWait)) {
             dataSource.setConnectionTimeout(Long.parseLong(maxWait));
         }
-        /** 最大并发连接数 maxActive */
-        String maxActive = env.getProperty("spring.datasource.maxActive");
+        /** 最大并发连接数 maximum-pool-size */
+        String maxActive = env.getProperty("spring.datasource.hikari.maximum-pool-size");
         if (StringUtils.isNotBlank(maxActive)) {
             dataSource.setMaximumPoolSize(Integer.parseInt(maxActive));
         }
         /** 最小空闲连接数 minIdle 官方建议不设置*/
-        String minIdle = env.getProperty("spring.datasource.minIdle");
+        String minIdle = env.getProperty("spring.datasource.hikari.minimum-idle");
         if (StringUtils.isNotBlank(minIdle)) {
             dataSource.setMinimumIdle(Integer.parseInt(minIdle));
         }
         /** idleTimeout 空闲连接释放最大时间-最大空闲连接时间*/
-        String idleTimeout = env.getProperty("spring.datasource.idleTimeout");
+        String idleTimeout = env.getProperty("spring.datasource.hikari.idle-timeout");
         if (StringUtils.isNotBlank(idleTimeout)) {
             dataSource.setIdleTimeout(Long.parseLong(idleTimeout));
         }
         /** maxLifetime 连接的最大生命周期*/
-        String maxLifetime = env.getProperty("spring.datasource.maxLifetime");
+        String maxLifetime = env.getProperty("spring.datasource.hikari.max-lifetime");
         if (StringUtils.isNotBlank(maxLifetime)) {
             dataSource.setMaxLifetime(Long.parseLong(maxLifetime));
         }
         /**设置连接池名*/
-        String poolname = env.getProperty("spring.datasource.poolname");
+        String poolname = env.getProperty("spring.datasource.hikari.pool-name");
         if (StringUtils.isNotBlank(poolname)) {
             dataSource.setPoolName(poolname);
         }
-
-
-        /** sql监控配置*/
-        String filters = env.getProperty("spring.datasource.filters");
-        if (!StringUtils.isNotBlank(filters)) {
-            filters = "stat";
-        }
-//        dataSource.setFilters(filters);health-check-registry
-        dataSource.setHealthCheckRegistry(filters);
-        dataSource.setMetricRegistry(filters);
-        /** 慢sql监控配置
-         * https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatFilter
-         * https://blog.csdn.net/sjm01234/article/details/79009545
-         * */
-        String connectionProperties = env.getProperty("spring.datasource.connectionProperties");
-        if (!StringUtils.isNotBlank(connectionProperties)) {
-           connectionProperties = "druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=5000";
-        }
-//        dataSource.setConnectionProperties(connectionProperties);
-        dataSource.setHealthCheckProperties(new Properties());
         return dataSource;
     }
 
