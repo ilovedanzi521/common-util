@@ -1,9 +1,5 @@
 /****************************************************
-<<<<<<< HEAD
  * 创建人：  @author wangkai
-=======
- * 创建人：  @author wangkai    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间: 2017-11-8/15:11:24
  * 项目名称: ycmp-api
  * 文件名称: GlobalExceptionHandler.java
@@ -12,11 +8,7 @@
  *
  * All rights Reserved, Designed By 深圳市赢和信息技术有限公司
  * @Copyright:2016-2017
-<<<<<<< HEAD
  *
-=======
- * 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  ********************************************************/
 package com.win.dfas.common.exception;
 
@@ -33,19 +25,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 /**
-<<<<<<< HEAD
  *
  * 包名称： com.yhfin.ycmp.api.exception
  * 类名称：GlobalExceptionHandler
  * 类描述：
  * 创建人：@author wangkai
-=======
- * 
- * 包名称： com.yhfin.ycmp.api.exception 
- * 类名称：GlobalExceptionHandler 
- * 类描述：
- * 创建人：@author wangkai 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间：2017年11月8日/下午3:11:32
  *
  */
@@ -61,13 +45,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
         String mes = e.getMessage();
         String logMsg = e.getMessage();
-<<<<<<< HEAD
         if (e instanceof WinException) {
             WinException exp = (WinException) e;
-=======
-        if (e instanceof com.yhfin.ycmp.api.exception.YhException) {
-            com.yhfin.ycmp.api.exception.YhException exp = (com.yhfin.ycmp.api.exception.YhException) e;
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
             mes = exp.getMsg();
             logMsg = exp.getLogMsg();
             if (StringUtils.isBlank(logMsg)) {
@@ -84,12 +63,8 @@ public class GlobalExceptionHandler {
             logMsg = invalid.getConstraintViolations().toString();
         }
         if (StringUtils.isEmpty(mes)) {
-<<<<<<< HEAD
             //TODO
 //            mes = BaseResultCode.SYSTEM_ERROR.getMessage();
-=======
-            mes = BaseResultCode.SYSTEM_ERROR.getMessage();
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
         }
         logger.error("url={},errormsg={}",req.getRequestURL().toString(),logMsg, e);
         return new ResponseEntity<String>(mes, HttpStatus.INTERNAL_SERVER_ERROR);

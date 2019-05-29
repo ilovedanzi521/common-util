@@ -1,9 +1,5 @@
 /****************************************************
-<<<<<<< HEAD
  * 创建人：  @author wangkai
-=======
- * 创建人：  @author wangkai    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间: 2017-11-8/18:40:14
  * 项目名称: dfas-common-util
  * 文件名称: MD5Utils.java
@@ -11,17 +7,10 @@
  *
  * All rights Reserved, Designed By
  * @Copyright:2016-2017
-<<<<<<< HEAD
  *
  ********************************************************/
 
 package com.win.dfas.common.util;
-=======
- * 
- ********************************************************/
-
-package com.dfas.common.util;
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -37,29 +26,17 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
 /**
-<<<<<<< HEAD
  *
  * 包名称： com.dfas.common.util
  * 类名称：MD5Util
  * 类描述：MD5加密工具类
  * 创建人：@author wangkai
-=======
- * 
- * 包名称： com.dfas.common.util
- * 类名称：MD5Util
- * 类描述：MD5加密工具类
- * 创建人：@author wangkai 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间：2017年11月8日/下午6:40:34
  *
  */
 public class Md5Util {
     private final static Logger logger = LoggerFactory.getLogger(Md5Util.class);
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
     static MessageDigest md = null;
 
     static {
@@ -72,11 +49,7 @@ public class Md5Util {
 
     /**
      * 对一个文件求他的md5值
-<<<<<<< HEAD
      *
-=======
-     * 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
      * @param f
      *            要求md5值的文件
      * @return md5串
@@ -101,11 +74,7 @@ public class Md5Util {
 
     /**
      * 求一个字符串的md5值
-<<<<<<< HEAD
      *
-=======
-     * 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
      * @param target
      *            字符串
      * @return md5 value
@@ -117,17 +86,9 @@ public class Md5Util {
     public static String uniqueId() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
-<<<<<<< HEAD
 
     public static void main(String[] args) {
     	System.out.println(Md5Util.md5("123456"));
 	}
 
-=======
-    
-    public static void main(String[] args) {
-    	System.out.println(MD5Utils.md5("123456"));
-	}
-    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 }

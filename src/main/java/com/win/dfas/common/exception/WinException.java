@@ -1,9 +1,5 @@
 /****************************************************
-<<<<<<< HEAD
  * 创建人：  @author wangkai
-=======
- * 创建人：  @author wangkai    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间: 2017-11-8/15:10:31
  * 项目名称: ycmp-api
  * 文件名称: YhException.java
@@ -12,22 +8,14 @@
  *
  * All rights Reserved, Designed By 深圳市赢和信息技术有限公司
  * @Copyright:2016-2017
-<<<<<<< HEAD
  *
-=======
- * 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  ********************************************************/
 
 package com.win.dfas.common.exception;
 
 
 /**
-<<<<<<< HEAD
  *
-=======
- * 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 包名称： com.yhfin.ycmp.api.exception
  * 类名称：YhException
  * 类描述：自定义异常 创建人：@author
@@ -40,7 +28,6 @@ public class WinException extends RuntimeException {
 	 * @Fields serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
 
 	/**
 	 * 异常对应的返回码
@@ -51,18 +38,6 @@ public class WinException extends RuntimeException {
 	 * 异常对应的描述信息
 	 */
 	private String msg;
-=======
-	
-	/**
-	 * 异常对应的返回码
-	 */
-	private String code; 
-	
-	/**
-	 * 异常对应的描述信息
-	 */
-	private String msg; 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	/**
 	 * 日志信息
 	 */
@@ -113,16 +88,6 @@ public class WinException extends RuntimeException {
 		this.msg = msg;
 		this.code = code;
 	}
-<<<<<<< HEAD
-=======
-
-	public YhException(String code, String msg, Throwable cause) {
-		super(msg, cause);
-		this.msg = msg;
-		this.code = code;
-	}
-
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	public WinException(String code, String msg, String logMsg, Throwable cause) {
 		super(msg, cause);
 		this.msg = msg;

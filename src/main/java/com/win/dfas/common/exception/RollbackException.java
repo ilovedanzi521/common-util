@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD
  * 创建人：     @author wangkai
-=======
- * 创建人：     @author wangkai    
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间: 2017年12月21日/下午2:23:51
  * 项目名称：  ycmp-api
  * 文件名称: RollbackException.java
@@ -12,7 +8,6 @@
  *
  * All rights Reserved, Designed By 深圳市赢和信息技术有限公司
  * @Copyright:2016-2017
-<<<<<<< HEAD
  *
  */
 package com.win.dfas.common.exception;
@@ -30,45 +25,17 @@ public class RollbackException extends RuntimeException {
 	/**
 	 * @Fields serialVersionUID
 	 */
-=======
- * 
- */
-package com.yhfin.ycmp.api.exception;
-
-/**   
- * 包名称： com.yhfin.ycmp.api.exception 
- * 类名称：RollbackException 
- * 类描述：自定义回滚异常,如需数据回滚，可抛出此异常
- * 创建人：@author wangkai 
- * 创建时间：2017年12月21日/下午2:23:51
- *     
- */
-public class RollbackException extends RuntimeException {
-
-	/** 
-	 * @Fields serialVersionUID  
-	 */ 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 异常对应的返回码
 	 */
-<<<<<<< HEAD
 	private String code;
 
 	/**
 	 * 异常对应的描述信息
 	 */
 	private String msg;
-=======
-	private String code; 
-	
-	/**
-	 * 异常对应的描述信息
-	 */
-	private String msg; 
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	/**
 	 * 日志信息
 	 */
@@ -129,9 +96,5 @@ public class RollbackException extends RuntimeException {
 		this.code = code;
 		this.msg = msg;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 }
