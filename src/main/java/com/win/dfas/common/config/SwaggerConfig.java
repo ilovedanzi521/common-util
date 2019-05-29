@@ -63,10 +63,10 @@ public class SwaggerConfig {
 	 */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("深圳市赢和信息技术有限公司API接口文档")
+                .title("财富管理平台API接口文档")
                 .description("")
                 .termsOfServiceUrl("http://www.yhfin.com")
-                .contact(new Contact("赢和信息", "http://www.yhfin.com", ""))
+                .contact(new Contact("财富管理", "http://www.yhfin.com", ""))
                 .version("1.0")
                 .build();
     }
