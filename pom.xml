@@ -28,13 +28,13 @@
         <fastjson-version>1.2.58</fastjson-version>
         <mybatis-starter-version>2.0.1</mybatis-starter-version>
         <pagehelper-version>1.2.10</pagehelper-version>
-        <oracle-jdbc-version>12.1.0.2</oracle-jdbc-version>
+        <!--<oracle-jdbc-version>12.1.0.2</oracle-jdbc-version>-->
         <poi-version>3.14</poi-version>
         <pdfbox-version>2.0.4</pdfbox-version>
         <logback-version>1.2.3</logback-version>
         <logstash-version>4.11</logstash-version>
         <pinyin4j-version>2.5.1</pinyin4j-version>
-        <aspose-words-version>14.9.0</aspose-words-version>
+      <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
     <dependencies>
@@ -77,11 +77,11 @@
         <!--mybatis 分页组件 end  -->
 
         <!-- Orcle JDBC驱动 -->
-        <dependency>
+      <!--  <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>${oracle-jdbc-version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -219,11 +219,11 @@
         </dependency>
 
         <!-- pdf文件转换 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.aspose</groupId>
             <artifactId>aspose-words</artifactId>
             <version>${aspose-words-version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- <dependency>
              <groupId>org.springframework.cloud</groupId>
