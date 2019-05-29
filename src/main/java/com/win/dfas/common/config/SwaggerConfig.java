@@ -1,5 +1,9 @@
 /****************************************************
+<<<<<<< HEAD
  * 创建人：  @author xiep
+=======
+ * 创建人：  @author xiep    
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间: 2017-11-7/16:03:27
  * 项目名称: ycmp-api
  * 文件名称: SwaggerConfig.java
@@ -8,9 +12,15 @@
  *
  * All rights Reserved, Designed By 深圳市赢和信息技术有限公司
  * @Copyright:2016-2017
+<<<<<<< HEAD
  *
  ********************************************************/
 package com.win.dfas.common.config;
+=======
+ * 
+ ********************************************************/
+package com.yhfin.ycmp.api.config;
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,25 +37,40 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
+<<<<<<< HEAD
  *
  * 包名称：com.yhfin.ycmp.api.config
  * 类名称：SwaggerConfig
  * 类描述：Swagger基础配置
  * 创建人：@author wangkai
+=======
+ * 
+ * 包名称：com.yhfin.ycmp.api.config 
+ * 类名称：SwaggerConfig 
+ * 类描述：Swagger基础配置
+ * 创建人：@author wangkai 
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
  * 创建时间：2018年8月6日/下午4:36:14
  *
  */
 @Configuration
 @EnableSwagger2
+<<<<<<< HEAD
 @ComponentScan(basePackages = { "com.*"})
 public class SwaggerConfig {
 
+=======
+@ComponentScan(basePackages = { "com.win"})
+public class SwaggerConfig {
+	
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	@Bean
     public Docket createRestApi() {
 		/**函数返回一个ApiSelectorBuilder实例用来控制哪些接口暴露给Swagger来展现*/
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
+<<<<<<< HEAD
                 .apis(RequestHandlerSelectors.basePackage("com.*"))
                 .paths(PathSelectors.any())
                 .build();
@@ -59,6 +84,21 @@ public class SwaggerConfig {
 	 * @return: ApiInfo
 	 * @throws
 	 * @author: wangkai
+=======
+                .apis(RequestHandlerSelectors.basePackage("com.yhfin"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+	
+	/**
+	 * 
+	 * @Title: apiInfo
+	 * @Description: apiInfo()用来创建该Api的基本信息(这些基本信息会展现在文档页面中)
+	 * @return   
+	 * @return: ApiInfo   
+	 * @throws
+	 * @author: wangkai 
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
 	 * @Date:  2018年8月6日/下午4:37:16
 	 */
     private ApiInfo apiInfo() {
@@ -70,4 +110,8 @@ public class SwaggerConfig {
                 .version("1.0")
                 .build();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 831cd649ecbb7ec7407eabd156bb7909fdefe066
