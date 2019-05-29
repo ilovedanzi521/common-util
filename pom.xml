@@ -34,6 +34,12 @@
         <logback-version>1.2.3</logback-version>
         <logstash-version>4.11</logstash-version>
         <pinyin4j-version>2.5.1</pinyin4j-version>
+        <feign-okhttp-version>10.2.3</feign-okhttp-version>
+        <okhttp-version>2.5.0</okhttp-version>
+        <openfeign-version>10.2.3</openfeign-version>
+        <mysql-connector-version>8.0.16</mysql-connector-version>
+        <openfeign-version>2.1.1.RELEASE</openfeign-version>
+        <jedis-version>3.0.1</jedis-version>
       <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
@@ -83,19 +89,24 @@
             <version>${oracle-jdbc-version}</version>
         </dependency>-->
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.1.1.RELEASE</version>
+            <version>${openfeign-version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
-            <version>2.5.0</version>
+            <version>${okhttp-version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
-            <version>10.2.3</version>
+            <version>${feign-okhttp-version}</version>
         </dependency>
         <!-- 集成redis -->
         <dependency>
@@ -105,6 +116,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+            <version>${jedis-version}</version>
         </dependency>
 
         <!-- ******************关于POI相关包***************** -->
