@@ -33,6 +33,8 @@ public class BaseVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Long id;
+	
 	private Integer userId;
 	
 	private String ip;
@@ -43,7 +45,7 @@ public class BaseVO implements Serializable {
 	
 	private Integer menuId;
 
-	private Integer currentPage;
+	private Integer pageNum;
 	
 	private Integer pageSize;
 	
