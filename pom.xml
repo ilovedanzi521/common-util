@@ -39,7 +39,7 @@
         <openfeign-version>10.2.3</openfeign-version>
         <mysql-connector-version>8.0.16</mysql-connector-version>
         <openfeign-version>2.1.1.RELEASE</openfeign-version>
-        <jedis-version>3.0.1</jedis-version>
+        <jedis-version>2.9.3</jedis-version>
       <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
