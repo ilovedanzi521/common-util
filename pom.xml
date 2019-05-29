@@ -28,13 +28,19 @@
         <fastjson-version>1.2.58</fastjson-version>
         <mybatis-starter-version>2.0.1</mybatis-starter-version>
         <pagehelper-version>1.2.10</pagehelper-version>
-        <oracle-jdbc-version>12.1.0.2</oracle-jdbc-version>
+        <!--<oracle-jdbc-version>12.1.0.2</oracle-jdbc-version>-->
         <poi-version>3.14</poi-version>
         <pdfbox-version>2.0.4</pdfbox-version>
         <logback-version>1.2.3</logback-version>
         <logstash-version>4.11</logstash-version>
         <pinyin4j-version>2.5.1</pinyin4j-version>
-        <aspose-words-version>14.9.0</aspose-words-version>
+        <feign-okhttp-version>10.2.3</feign-okhttp-version>
+        <okhttp-version>2.5.0</okhttp-version>
+        <openfeign-version>10.2.3</openfeign-version>
+        <mysql-connector-version>8.0.16</mysql-connector-version>
+        <openfeign-version>2.1.1.RELEASE</openfeign-version>
+        <jedis-version>2.9.3</jedis-version>
+      <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
     <dependencies>
@@ -77,25 +83,30 @@
         <!--mybatis 分页组件 end  -->
 
         <!-- Orcle JDBC驱动 -->
-        <dependency>
+      <!--  <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>${oracle-jdbc-version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.1.1.RELEASE</version>
+            <version>${openfeign-version}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
-            <version>2.5.0</version>
+            <version>${okhttp-version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
-            <version>10.2.3</version>
+            <version>${feign-okhttp-version}</version>
         </dependency>
         <!-- 集成redis -->
         <dependency>
@@ -105,6 +116,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+            <version>${jedis-version}</version>
         </dependency>
 
         <!-- ******************关于POI相关包***************** -->
@@ -219,11 +231,11 @@
         </dependency>
 
         <!-- pdf文件转换 -->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.aspose</groupId>
             <artifactId>aspose-words</artifactId>
             <version>${aspose-words-version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- <dependency>
              <groupId>org.springframework.cloud</groupId>
