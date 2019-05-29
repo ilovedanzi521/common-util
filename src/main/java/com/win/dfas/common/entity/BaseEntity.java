@@ -35,6 +35,8 @@ public class BaseEntity implements Serializable {
 	
 	private Long id;
 	
+	private Integer deleteFlag; // 逻辑删除标志: 0-未删除、1-已删除
+	
 	private Long createUserId;
 	
 	private String createTime;
