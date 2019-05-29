@@ -38,8 +38,9 @@
         <okhttp-version>2.5.0</okhttp-version>
         <openfeign-version>10.2.3</openfeign-version>
         <mysql-connector-version>8.0.16</mysql-connector-version>
-        <openfeign-version>2.1.1.RELEASE</openfeign-version>
+        <openfeign-version>2.1.0.RELEASE</openfeign-version>
         <jedis-version>2.9.3</jedis-version>
+        <hutool-version>4.4.2</hutool-version>
       <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
@@ -203,19 +204,19 @@
         </dependency>
 
         <!--begin logback相关 -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
+        <!--<dependency>-->
+            <!--<groupId>ch.qos.logback</groupId>-->
+            <!--<artifactId>logback-core</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>ch.qos.logback</groupId>-->
+            <!--<artifactId>logback-classic</artifactId>-->
+        <!--</dependency>-->
+       <!-- <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-version}</version>
-        </dependency>
+        </dependency>-->
         <!--end logback相关  -->
 
         <!-- Lombok -->
@@ -237,15 +238,16 @@
             <version>${aspose-words-version}</version>
         </dependency>-->
 
-        <!-- <dependency>
+        <dependency>
              <groupId>org.springframework.cloud</groupId>
              <artifactId>spring-cloud-starter-config</artifactId>
-         </dependency>-->
+            <version>${openfeign-version}</version>
+         </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>4.5.10</version>
+            <version>${hutool-version}</version>
         </dependency>
 
         <!-- 连接池-->
