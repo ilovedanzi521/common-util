@@ -46,14 +46,12 @@ public class ObjectUtils {
 	 */
 	public static <T> List<T> copyPropertiesList(List<?> sourceList, Class<T> clazz) {
 
-		List<T> resultList = null;
+		List<T> resultList = new ArrayList<T>();;
 
 		try {
 			if (sourceList == null || sourceList.size() == 0) {
-				return null;
+				return resultList;
 			}
-
-			resultList = new ArrayList<T>();
 
 			for (Object source : sourceList) {
 				T target = clazz.newInstance();

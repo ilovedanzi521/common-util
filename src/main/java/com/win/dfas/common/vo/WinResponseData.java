@@ -111,6 +111,13 @@ public class WinResponseData implements Serializable {
 		this.msg = msg;
 		this.data = data;
 	}
+	
+	private WinResponseData(WinRspType winRspType, String code, String msg, Object data) {
+		this.winRspType = winRspType;
+		this.code = code;
+		this.msg = msg;
+		this.data = data;
+	}
 
 	private WinResponseData(String code,Object data) {
 		this.code = code;
@@ -173,6 +180,40 @@ public class WinResponseData implements Serializable {
 	 */
 	public static WinResponseData handleWarn(String warnMsg, Object... args) {
 		return new WinResponseData(WinRspType.WARN, warnMsg, args);
+	}
+	
+	/**
+	 * 
+	 * @Title: handleError
+	 * @Description: 返回错误消息
+	 * @param code 编码
+	 * @param errorMsg 内容
+	 * @return   
+	 * @return: WinResponseData  错误消息
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年5月30日/下午2:34:52
+	 */
+	public static WinResponseData handleError(String code, String errorMsg) {
+		return new WinResponseData(WinRspType.ERROR, code, errorMsg, null);
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @Title: handleError
+	 * @Description: 返回错误消息
+	 * @param code 编码
+	 * @param errorMsg 内容
+	 * @param args 参数
+	 * @return   
+	 * @return: WinResponseData  错误消息  
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年5月30日/下午2:35:37
+	 */
+	public static WinResponseData handleError(String code, String errorMsg, Object... args) {
+		return new WinResponseData(WinRspType.ERROR, code, errorMsg, args);
 	}
 
 	/**
