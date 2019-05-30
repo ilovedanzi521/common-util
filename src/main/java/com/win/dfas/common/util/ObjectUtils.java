@@ -31,7 +31,7 @@ import org.springframework.beans.BeanUtils;
  *     
  */
 public class ObjectUtils {
-
+	
 	/**
 	 * 
 	 * @Title: copyPropertiesList
@@ -44,19 +44,19 @@ public class ObjectUtils {
 	 * @author: hechengcheng 
 	 * @Date:  2019年5月29日/下午5:41:06
 	 */
-	public static List<?> copyPropertiesList(List<?> sourceList, Class<?> clazz) {
+	public static <T> List<T> copyPropertiesList(List<?> sourceList, Class<T> clazz) {
 
-		List<Object> resultList = null;
+		List<T> resultList = null;
 
 		try {
 			if (sourceList == null || sourceList.size() == 0) {
 				return null;
 			}
 
-			resultList = new ArrayList<Object>();
+			resultList = new ArrayList<T>();
 
 			for (Object source : sourceList) {
-				Object target = clazz.newInstance();
+				T target = clazz.newInstance();
 				BeanUtils.copyProperties(source, target);
 				resultList.add(target);
 			}
@@ -66,7 +66,7 @@ public class ObjectUtils {
 			e.printStackTrace();
 		}
 
-		return resultList;
+		return (List<T>)resultList;
 	}
 	
 	/**
