@@ -8,7 +8,7 @@
         <version>2.0.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.dfas.framework</groupId>
+    <groupId>com.win.dfas</groupId>
     <artifactId>dfas-common-util</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
