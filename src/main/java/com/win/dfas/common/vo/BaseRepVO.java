@@ -3,7 +3,7 @@
  * 创建时间: 2019年5月30日/下午4:18:37
  * 项目名称：  dfas-common-util
  * 文件名称: BaseRepVO.java
- * 文件描述: @Description: TODO(用一句话描述该文件做什么)
+ * 文件描述: @Description: 基础返回VO类
  *
  * All rights Reserved, Designed By 投资交易团队
  * @Copyright:2016-2019
@@ -15,21 +15,17 @@ package com.win.dfas.common.vo;
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**   
  * 包名称： com.win.dfas.common.vo 
  * 类名称：BaseRepVO 
- * 类描述：TODO
+ * 类描述：基础返回VO类
  * 创建人：@author hechengcheng 
  * 创建时间：2019年5月30日/下午4:18:37
  *     
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class BaseRepVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

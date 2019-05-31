@@ -15,21 +15,17 @@ package com.win.dfas.common.vo;
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**   
  * 包名称： com.win.dfas.common.vo 
- * 类名称：BaseReqVO 
+ * 类名称： BaseReqVO
  * 类描述：基础请求VO类
  * 创建人：@author hechengcheng 
  * 创建时间：2019年5月30日/下午4:16:10
  *     
  */
-@Setter
-@Getter
-@ToString
+@Data
 public class BaseReqVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
