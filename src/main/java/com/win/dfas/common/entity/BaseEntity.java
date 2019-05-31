@@ -14,9 +14,7 @@ package com.win.dfas.common.entity;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**   
  * 包名称： com.win.dfas.common.entity 
@@ -26,9 +24,7 @@ import lombok.ToString;
  * 创建时间：2019年5月29日/上午10:59:19
  *     
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

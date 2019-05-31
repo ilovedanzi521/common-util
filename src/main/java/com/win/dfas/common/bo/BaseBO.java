@@ -14,9 +14,7 @@ package com.win.dfas.common.bo;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**   
  * 包名称： com.win.dfas.common 
@@ -26,9 +24,7 @@ import lombok.ToString;
  * 创建时间：2019年5月29日/上午11:33:16
  *     
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class BaseBO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
