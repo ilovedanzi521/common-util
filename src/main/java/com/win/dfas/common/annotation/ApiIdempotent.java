@@ -1,4 +1,4 @@
-package com.win.dfas.common.anno;
+package com.win.dfas.common.annotation;
 
 /**
  * 包名称：com.win.dfas.common.anno

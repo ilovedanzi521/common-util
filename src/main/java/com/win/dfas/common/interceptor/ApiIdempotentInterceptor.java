@@ -7,7 +7,7 @@ package com.win.dfas.common.interceptor;
  * 创建人：@author wanglei
  * 创建时间：2019/5/28/13:35
  */
-import com.win.dfas.common.anno.ApiIdempotent;
+import com.win.dfas.common.annotation.ApiIdempotent;
 import com.win.dfas.common.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

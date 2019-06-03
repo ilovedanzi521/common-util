@@ -11,4 +11,15 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface TokenService {
     void checkToken(HttpServletRequest request) ;
+
+    /**
+     * @Title: getUserToken
+     * @Description: 设置基本用户信息
+     * @param request
+     * @return
+     * @throws
+     * @author: zhoujinyin
+     * @Date:  2019/6/3/15:17
+     */
+    void setBaseUserInfoByToken(HttpServletRequest request);
 }

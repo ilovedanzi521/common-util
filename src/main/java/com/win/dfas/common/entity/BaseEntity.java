@@ -13,6 +13,7 @@
 package com.win.dfas.common.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -25,20 +26,40 @@ import lombok.Data;
  *     
  */
 @Data
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-	
-	private Integer deleteFlag; // 逻辑删除标志: 0-未删除、1-已删除
-	
-	private Long createUserId;
-	
-	private String createTime;
-	
-	private Long updateUserId;
-	
-	private String updateTime;
+
+	protected Long id;
+
+	protected Long createUserId;
+
+	protected Date createTime;
+
+	protected Long updateUserId;
+
+	protected Date updateTime;
+
+	public static final Boolean DEL_FLAG_NORMAL = false;
+	public static final Boolean DEL_FLAG_DELETE = true;
+
+	public BaseEntity() {
+
+	}
+
+	public BaseEntity(Long id) {
+		this();
+		this.id = id;
+	}
+
+	/**
+	 * 插入之前执行方法，子类实现
+	 */
+	public abstract void preInsert();
+
+	/**
+	 * 更新之前执行方法，子类实现
+	 */
+	public abstract void preUpdate();
 
 }

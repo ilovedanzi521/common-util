@@ -2,6 +2,9 @@ package com.win.dfas.common.service.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.win.dfas.common.constant.CommonConstants;
+import com.win.dfas.common.entity.BaseUserInfo;
+import com.win.dfas.common.feign.UserFeign;
 import org.apache.commons.lang.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +23,16 @@ import com.win.dfas.common.util.RedisUtil;
 
 @Service
 public class TokenServiceImpl implements TokenService {
-    private static final String TOKEN_NAME = "token";
     @Autowired
-    RedisUtil                   redisUtil;
+    private UserFeign userFeign;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public void checkToken(HttpServletRequest request) {
-        String token = request.getHeader(TOKEN_NAME);
+        String token = request.getHeader(CommonConstants.TOKEN_NAME);
         if (StringUtils.isBlank(token)) {        // header中不存在token
-            token = request.getParameter(TOKEN_NAME);
+            token = request.getParameter(CommonConstants.TOKEN_NAME);
             if (StringUtils.isBlank(token)) {    // parameter中也不存在token
                 throw new WinException("报文不存在token");
             }
@@ -40,5 +44,11 @@ public class TokenServiceImpl implements TokenService {
         if (!redisUtil.delete(token)) {
             throw new WinException("重复操作");
         }
+    }
+
+    @Override
+    public void setBaseUserInfoByToken(HttpServletRequest request) {
+        BaseUserInfo baseUserInfo = userFeign.getInfoFromToken(request.getHeader(CommonConstants.TOKEN_NAME));
+        request.setAttribute(CommonConstants.USER_KEY, baseUserInfo);
     }
 }
