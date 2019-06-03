@@ -13,8 +13,11 @@
 package com.win.dfas.common.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import com.win.dfas.common.util.PrimaryKeyUtil;
+import com.win.dfas.common.util.UserUtil;
+
+import cn.hutool.core.date.DateUtil;
 import lombok.Data;
 
 /**   
@@ -26,40 +29,65 @@ import lombok.Data;
  *     
  */
 @Data
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Long id;
+	private Long id;
+	
+	private Integer deleteFlag;
 
-	protected Long createUserId;
+	private Long createUserId;
 
-	protected Date createTime;
+	private String createTime;
 
-	protected Long updateUserId;
+	private Long updateUserId;
 
-	protected Date updateTime;
-
-	public static final Boolean DEL_FLAG_NORMAL = false;
-	public static final Boolean DEL_FLAG_DELETE = true;
-
-	public BaseEntity() {
-
-	}
-
-	public BaseEntity(Long id) {
-		this();
-		this.id = id;
-	}
-
+	private String updateTime;
+	
 	/**
-	 * 插入之前执行方法，子类实现
+	 * 
+	 * @Title: preInsert
+	 * @Description: 预插入实体公用参数处理  
+	 * @return: void   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年6月3日/下午7:01:51
 	 */
-	public abstract void preInsert();
-
+	public void preInsert() {
+        this.id = PrimaryKeyUtil.generateId();
+        this.deleteFlag = 0;
+        this.createUserId = UserUtil.getUserId();
+        this.createTime = DateUtil.now();
+    }
+	
 	/**
-	 * 更新之前执行方法，子类实现
+	 * 
+	 * @Title: preUpdate
+	 * @Description: 预修改实体公用参数处理
+	 * @return   
+	 * @return: void   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年6月3日/下午6:53:18
 	 */
-	public abstract void preUpdate();
-
+    public void preUpdate() {
+        this.updateUserId = UserUtil.getUserId();
+        this.updateTime = DateUtil.now();
+    }
+    
+    /**
+     * 
+     * @Title: preDelete
+     * @Description: 预删除实体公用参数处理
+     * @return   
+     * @return: void   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年6月3日/下午6:55:19
+     */
+    public void preDelete() {
+    	this.preUpdate();
+        this.deleteFlag = 1;
+    }
 }
