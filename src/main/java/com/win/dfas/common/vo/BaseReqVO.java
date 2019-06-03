@@ -49,9 +49,9 @@ public class BaseReqVO implements Serializable {
 	private Integer menuId;
 
 	@ApiModelProperty(value = "当前页数")
-	private Integer pageNum;
+	private Integer pageNum = 1;
 	
 	@ApiModelProperty(value = "每页大小")
-	private Integer pageSize;
+	private Integer pageSize = 10;
 
 }
