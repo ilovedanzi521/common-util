@@ -37,11 +37,11 @@ public class BaseEntity implements Serializable {
 	
 	private Integer deleteFlag;
 
-	private Long createUserId;
+	private String createUserId;
 
 	private String createTime;
 
-	private Long updateUserId;
+	private String updateUserId;
 
 	private String updateTime;
 	
