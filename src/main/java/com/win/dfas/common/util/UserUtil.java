@@ -32,7 +32,7 @@ public class UserUtil {
         return (BaseUserInfo) request.getAttribute(CommonConstants.USER_KEY);
     }
 
-    public static Long getUserId() {
+    public static String getUserId() {
         BaseUserInfo baseUserInfo = (BaseUserInfo) request.getAttribute(CommonConstants.USER_KEY);
         return baseUserInfo.getUserId();
     }

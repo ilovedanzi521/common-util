@@ -19,15 +19,15 @@ package com.win.dfas.common.entity;
  * 创建时间：2019/6/3/15:44
  */
 public class BaseUserInfo {
-    private Long userId;
+    private String userId;
     private String loginName;
     private String userName;
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
