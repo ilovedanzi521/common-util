@@ -22,6 +22,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.github.pagehelper.PageInfo;
+
 /**   
  * 包名称： com.win.dfas.common.util 
  * 类名称：ListUtil 
@@ -65,6 +67,44 @@ public class ObjectUtils {
 		}
 
 		return (List<T>)resultList;
+	}
+	
+	/**
+	 * 
+	 * @Title: copyPageInfo
+	 * @Description: 分页对象拷贝
+	 * @param sourcePageInfo 源分页对象
+	 * @param clazz 目标分页对象中List的对象类型
+	 * @return   
+	 * @return: PageInfo<T>  转换后的分页对象 
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年6月6日/下午1:17:29
+	 */
+	public static <T> PageInfo<T> copyPageInfo(PageInfo<?> sourcePageInfo, Class<T> clazz) {
+		
+		PageInfo<T> resultPageInfo = new PageInfo<T>();
+				
+		try {
+			if (sourcePageInfo == null) {
+				return resultPageInfo;
+			}
+			
+			// 拷贝PageInfo对象(排除list)
+			BeanUtils.copyProperties(sourcePageInfo, resultPageInfo, "list");
+			
+			List<?> sourceList = sourcePageInfo.getList();
+			
+			// 拷贝PageInfo对象中的list
+			List<T> targetLsit = copyPropertiesList(sourceList, clazz);
+			
+			resultPageInfo.setList(targetLsit);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return (PageInfo<T>)resultPageInfo;
+		
 	}
 	
 	/**
