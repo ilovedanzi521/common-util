@@ -11,6 +11,8 @@
  ********************************************************/
 package com.win.dfas.common.entity;
 
+import java.io.Serializable;
+
 /**
  * 包名称：com.win.dfas.common.entity
  * 类名称：BaseUserInfo
@@ -18,7 +20,7 @@ package com.win.dfas.common.entity;
  * 创建人：@author zhoujinyin
  * 创建时间：2019/6/3/15:44
  */
-public class BaseUserInfo {
+public class BaseUserInfo implements Serializable {
     private String userId;
     private String loginName;
     private String userName;

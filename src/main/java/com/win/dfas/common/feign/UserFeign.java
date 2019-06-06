@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 创建人：@author zhoujinyin
  * 创建时间：2019/6/3/14:32
  */
-//todo:不知道这个配置 后面再写
-@FeignClient()
+@FeignClient("dfas-auth-center")
 public interface UserFeign {
     /**
      * @Title: getInfoFromToken
