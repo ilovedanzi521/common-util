@@ -14,6 +14,10 @@ package com.win.dfas.common.vo;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.win.dfas.common.util.LongJsonDeserializer;
+import com.win.dfas.common.util.LongJsonSerializer;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -29,12 +33,14 @@ import lombok.Data;
 public class BaseRepVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	@JsonSerialize(using = LongJsonSerializer.class)
+	@JsonDeserialize(using = LongJsonDeserializer.class)
 	@ApiModelProperty(value = "主键ID")
 	private Long id;
 	
 	@ApiModelProperty(value = "创建用户ID")
-	private Long createUserId;
+	private String createUserId;
 	
 	@ApiModelProperty(value = "创建用户名")
 	private String createUserName;
@@ -43,7 +49,7 @@ public class BaseRepVO implements Serializable {
 	private String createTime;
 	
 	@ApiModelProperty(value = "更新用户ID")
-	private Long updateUserId;
+	private String updateUserId;
 	
 	@ApiModelProperty(value = "更新用户名")
 	private String updateUserName;
