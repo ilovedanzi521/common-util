@@ -22,8 +22,10 @@ import java.io.Serializable;
  */
 public class BaseUserInfo implements Serializable {
     private String userId;
-    private String loginName;
-    private String userName;
+    private String departmentCode;
+    private String companyCode;
+
+
 
     public String getUserId() {
         return userId;
@@ -33,19 +35,19 @@ public class BaseUserInfo implements Serializable {
         this.userId = userId;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public String getDepartmentCode() {
+        return departmentCode;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public void setDepartmentCode(String departmentCode) {
+        this.departmentCode = departmentCode;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getCompanyCode() {
+        return companyCode;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
     }
 }
