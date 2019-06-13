@@ -11,6 +11,8 @@
  ********************************************************/
 package com.win.dfas.common.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -20,34 +22,9 @@ import java.io.Serializable;
  * 创建人：@author zhoujinyin
  * 创建时间：2019/6/3/15:44
  */
+@Data
 public class BaseUserInfo implements Serializable {
     private String userId;
     private String departmentCode;
     private String companyCode;
-
-
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getDepartmentCode() {
-        return departmentCode;
-    }
-
-    public void setDepartmentCode(String departmentCode) {
-        this.departmentCode = departmentCode;
-    }
-
-    public String getCompanyCode() {
-        return companyCode;
-    }
-
-    public void setCompanyCode(String companyCode) {
-        this.companyCode = companyCode;
-    }
 }
