@@ -12,6 +12,8 @@
  ********************************************************/
 package com.win.dfas.common.exception;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
+import com.win.dfas.common.vo.WinResponseData;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -41,32 +44,32 @@ public class GlobalExceptionHandler {
      */
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<String> defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
-        String mes = e.getMessage();
-        String logMsg = e.getMessage();
-        if (e instanceof WinException) {
-            WinException exp = (WinException) e;
-            mes = exp.getMsg();
-            logMsg = exp.getLogMsg();
-            if (StringUtils.isBlank(logMsg)) {
-                logMsg = exp.getMsg();
-            }
-        }else if( e instanceof ConstraintViolationException) {
-            /** 对于统一参数校验的错误信息的获取 */
-            ConstraintViolationException invalid=(ConstraintViolationException)e;
-            StringBuilder sb = new StringBuilder();
-            for (ConstraintViolation<?> violation : invalid.getConstraintViolations()) {
-                sb.append("Error: " + violation.getPropertyPath() + ":" + violation.getMessage() + "\n");
-            }
-            mes = sb.toString();
-            logMsg = invalid.getConstraintViolations().toString();
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseBody
+    public WinResponseData defaultErrorHandler(HttpServletRequest req,RuntimeException e) {
+        logger.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+        return WinResponseData.handleError();
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseBody
+    public WinResponseData defaultErrorHandler(HttpServletRequest req,ConstraintViolationException e) {
+        /** 对于统一参数校验的错误信息的获取 */
+        ConstraintViolationException invalid=(ConstraintViolationException)e;
+        StringBuilder sb = new StringBuilder();
+        for (ConstraintViolation<?> violation : invalid.getConstraintViolations()) {
+            sb.append("Error: " + violation.getPropertyPath() + ":" + violation.getMessage() + "\n");
         }
-        if (StringUtils.isEmpty(mes)) {
-            //TODO
-//            mes = BaseResultCode.SYSTEM_ERROR.getMessage();
-        }
-        logger.error("url={},errormsg={}",req.getRequestURL().toString(),logMsg, e);
-        return new ResponseEntity<String>(mes, HttpStatus.INTERNAL_SERVER_ERROR);
+        String mes = sb.toString();
+        String logMsg = invalid.getConstraintViolations().toString();
+        logger.error("url={},errormsg={}",req.getRequestURL().toString(),logMsg);
+        return WinResponseData.handleError(mes);
+    }
+
+    @ExceptionHandler(WinException.class)
+    @ResponseBody
+    public WinResponseData defaultErrorHandler(HttpServletRequest req,WinException e) {
+        logger.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+        return WinResponseData.handleError(e.getCode(),e.getMsg());
     }
 }

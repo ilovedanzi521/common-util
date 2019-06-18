@@ -38,7 +38,7 @@ public class WinResponseData implements Serializable {
 		/** 警告 */
 		WARN("WARN", "警告"),
 		/** 错误 */
-		ERROR("ERROR", "错误"),
+		ERROR("ERROR", "服务器错误"),
 		/** 鉴权失败*/
 		AUTH_ERROR("AUTH_ERROR", "鉴权失败"),
 		/** 唯一性 */
@@ -243,6 +243,19 @@ public class WinResponseData implements Serializable {
 	 */
 	public static WinResponseData handleError(String errorMsg) {
 		return new WinResponseData(WinRspType.ERROR, errorMsg, null);
+	}
+
+
+	/**
+	 *
+	 * @Title: handleError
+	 * @Description: 返回错误消息
+	 * @param: @return
+	 * @return: RspData       返回错误消息
+	 * @throws
+	 */
+	public static WinResponseData handleError() {
+		return new WinResponseData(WinRspType.ERROR, WinRspType.ERROR.value, null);
 	}
 
 	/**
