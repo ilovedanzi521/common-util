@@ -14,7 +14,6 @@
 package com.win.dfas.common.config;
 
 import java.sql.SQLException;
-import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -30,8 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -137,7 +134,7 @@ public class MyBatisConfig {
         bean.setConfiguration(configuration);
 
         bean.setDataSource(defaultDataSource);
-        bean.setTypeAliasesPackage("com.**.model");
+        bean.setTypeAliasesPackage("com.**.entity");
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -174,35 +171,4 @@ public class MyBatisConfig {
         return new DataSourceTransactionManager(dataSource);
     }
 
-
-    /**
-     * druid监控
-     * @return
-     */
-    @Bean
-    public ServletRegistrationBean druidServlet() {
-        ServletRegistrationBean reg = new ServletRegistrationBean();
-//        reg.setServlet(new StatViewServlet());
-        //TODO
-        reg.addUrlMappings("/druid/*");
-        //reg.addInitParameter("allow", "127.0.0.1");
-        //reg.addInitParameter("deny","");
-        reg.addInitParameter("loginUsername", "ycmpadmin");
-        reg.addInitParameter("loginPassword", "ycmpadmin");
-        return reg;
-    }
-
-    /**
-     * druid监控过滤
-     * @return
-     */
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-//        filterRegistrationBean.setFilter(new WebStatFilter());
-        //TODO
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        return filterRegistrationBean;
-    }
 }

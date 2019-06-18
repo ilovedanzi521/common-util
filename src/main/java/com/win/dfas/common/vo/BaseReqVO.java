@@ -16,6 +16,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.win.dfas.common.entity.BaseUserInfo;
 import com.win.dfas.common.util.LongJsonDeserializer;
 import com.win.dfas.common.util.LongJsonSerializer;
 import io.swagger.annotations.ApiModelProperty;
@@ -39,6 +40,14 @@ public class BaseReqVO implements Serializable {
 	@ApiModelProperty(value = "主键ID")
 	private Long id;
 	
+	@ApiModelProperty(value = "请求源")
+	private String reqSource;
+	
+	@JsonSerialize(using = LongJsonSerializer.class)
+	@JsonDeserialize(using = LongJsonDeserializer.class)
+	@ApiModelProperty(value = "请求序列")
+	private Long reqSequence;
+	
 	@ApiModelProperty(value = "用户ID")
 	private String userId;
 	
@@ -51,13 +60,18 @@ public class BaseReqVO implements Serializable {
 	@ApiModelProperty(value = "主机名")
 	private String hostName;
 	
-	@ApiModelProperty(value = "菜单ID")
-	private Integer menuId;
+	@JsonSerialize(using = LongJsonSerializer.class)
+	@JsonDeserialize(using = LongJsonDeserializer.class)
+	@ApiModelProperty(value = "请求菜单ID")
+	private Long reqMenuId;
 
 	@ApiModelProperty(value = "请求当前页数")
 	private Integer reqPageNum = 1;
 	
 	@ApiModelProperty(value = "请求每页大小")
 	private Integer reqPageSize = 10;
+	
+	@ApiModelProperty(value = "请求用户")
+	private BaseUserInfo user;
 
 }
