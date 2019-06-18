@@ -135,7 +135,7 @@ public class WinResponseData implements Serializable {
 	 * @throws
 	 */
 	public static WinResponseData handleSuccess(String successMsg, Object args) {
-		return new WinResponseData(WinRspType.SUCC, successMsg, args);
+		return new WinResponseData(WinRspType.SUCC, "200", successMsg, args);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class WinResponseData implements Serializable {
 	 * @throws
 	 */
 	public static WinResponseData handleSuccess(String successMsg) {
-		return new WinResponseData(WinRspType.SUCC, successMsg, null);
+		return new WinResponseData(WinRspType.SUCC, "200", successMsg, null);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class WinResponseData implements Serializable {
 	 * @Date:  2017年11月10日/下午1:26:05
 	 */
 	public static WinResponseData handleSuccess(Object obj) {
-		return new WinResponseData(WinRspType.SUCC, OPERATION_SUCC, obj);
+		return new WinResponseData(WinRspType.SUCC, "200", OPERATION_SUCC, obj);
 	}
 
 	/**
