@@ -12,9 +12,10 @@
 package com.win.dfas.common.feign;
 
 
-import com.win.dfas.common.entity.BaseUserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.win.dfas.common.entity.BaseUserInfo;
 
 /**
  * 包名称：com.win.dfas.common.feign
@@ -34,6 +35,6 @@ public interface UserFeign {
      * @author: zhoujinyin
      * @Date:  2019/6/3/15:08
      */
-    @RequestMapping("api/web/userInfo")
+    @PostMapping("/api/web/userInfo")
     BaseUserInfo getInfoFromToken(String token);
 }
