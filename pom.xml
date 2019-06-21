@@ -40,7 +40,7 @@
         <mysql-connector-version>8.0.16</mysql-connector-version>
         <openfeign-version>2.1.0.RELEASE</openfeign-version>
         <jedis-version>2.9.3</jedis-version>
-        <hutool-version>4.4.2</hutool-version>
+        <hutool-version>4.5.13</hutool-version>
       <!--  <aspose-words-version>14.9.0</aspose-words-version>-->
     </properties>
 
