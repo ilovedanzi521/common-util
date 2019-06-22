@@ -1,14 +1,16 @@
 package com.win.dfas.common.service.impl;
 
-import javax.servlet.http.HttpServletRequest;
-
+import cn.hutool.core.util.StrUtil;
 import com.win.dfas.common.constant.CommonConstants;
 import com.win.dfas.common.entity.BaseUserInfo;
+import com.win.dfas.common.exception.WinException;
 import com.win.dfas.common.feign.UserFeign;
-import org.apache.commons.lang.StringUtils;
-
+import com.win.dfas.common.service.TokenService;
+import com.win.dfas.common.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 包名称：com.win.dfas.common.service.impl
@@ -17,9 +19,6 @@ import org.springframework.stereotype.Service;
  * 创建人：@author wanglei
  * 创建时间：2019/5/28/13:41
  */
-import com.win.dfas.common.exception.WinException;
-import com.win.dfas.common.service.TokenService;
-import com.win.dfas.common.util.RedisUtil;
 
 @Service
 public class TokenServiceImpl implements TokenService {
@@ -31,9 +30,9 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public void checkToken(HttpServletRequest request) {
         String token = request.getHeader(CommonConstants.TOKEN_NAME);
-        if (StringUtils.isBlank(token)) {        // header中不存在token
+        if (StrUtil.isBlank(token)) {        // header中不存在token
             token = request.getParameter(CommonConstants.TOKEN_NAME);
-            if (StringUtils.isBlank(token)) {    // parameter中也不存在token
+            if (StrUtil.isBlank(token)) {    // parameter中也不存在token
                 throw new WinException("报文不存在token");
             }
         }

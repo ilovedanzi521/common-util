@@ -11,6 +11,17 @@
  */
 package com.win.dfas.common.util;
 
+import cn.hutool.core.util.StrUtil;
+import net.sourceforge.pinyin4j.PinyinHelper;
+import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
+import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
+import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,18 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
-import net.sourceforge.pinyin4j.PinyinHelper;
-import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
-import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
-import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 /**
  * 包名称： com.yhfin.fcbp.basicparameter
@@ -94,10 +93,10 @@ public class PinyinUtil {
             String line = null;
             while((line=br.readLine())!=null){
                 String[] arr = line.split("#");
-                if(StringUtils.isNotEmpty(arr[1])){
+                if(StrUtil.isNotEmpty(arr[1])){
                     String[] sems = arr[1].split(" ");
                     for (String sem : sems) {
-                        if(StringUtils.isNotEmpty(sem)){
+                        if(StrUtil.isNotEmpty(sem)){
                             dictionary.put(sem , arr[0]);
                         }
                     }

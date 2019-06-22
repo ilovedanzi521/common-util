@@ -14,11 +14,8 @@ package com.win.dfas.common.exception;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.win.dfas.common.vo.WinResponseData;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,7 +43,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
-    public WinResponseData defaultErrorHandler(HttpServletRequest req,RuntimeException e) {
+    public WinResponseData defaultErrorHandler(HttpServletRequest req, RuntimeException e) {
         logger.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError();
     }
