@@ -22,9 +22,10 @@ package com.win.dfas.common.enumeration;
  */
 public enum FunctionEnum {
 
+	// 功能定义
 	ADD(0, "新增"),
-	UPDATE(1, "修改"),
-	DELETE(2, "删除"),
+	DELETE(1, "删除"),
+	UPDATE(2, "修改"),
 	IMPORT(3, "导入"),
 	EXPORT(4, "导出"),
     ;
@@ -50,7 +51,7 @@ public enum FunctionEnum {
 		String value = null;
 		
 		for(FunctionEnum functionEnum : FunctionEnum.values()) {
-			if (functionEnum.status == status) {
+			if (functionEnum.status.equals(status)) {
 				value = functionEnum.getValue();
 				break;
 			}

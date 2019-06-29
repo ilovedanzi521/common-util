@@ -46,10 +46,7 @@ import java.sql.SQLException;
 @ConditionalOnProperty(value="mybatis.datasource.enable")
 public class MyBatisConfig {
 
-    /**
-     * 日志.
-     */
-    private static final Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisConfig.class);
 
     /**
      * env.
@@ -140,7 +137,7 @@ public class MyBatisConfig {
             bean.setMapperLocations(resolver.getResources("classpath*:com/**/dao/**/*.xml"));
             return bean.getObject();
         } catch (Exception e) {
-            logger.error("mybatis初始化sqlSessionFactoryBean失败", e);
+        	LOGGER.error("mybatis初始化sqlSessionFactoryBean失败", e);
         }
         return null;
     }

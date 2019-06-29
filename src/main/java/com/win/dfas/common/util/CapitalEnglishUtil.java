@@ -22,10 +22,14 @@ package com.win.dfas.common.util;
  */
 public class CapitalEnglishUtil {
 
-	// 大写英文字母A-Z
+	/**
+	 * 大写英文字母A-Z
+	 */
     private static final String[] ATZ = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     
-    // 大写英文字母长度
+    /**
+     * 大写英文字母长度
+     */
     private static final int ATZ_LENGTH = 26;
     
     /**

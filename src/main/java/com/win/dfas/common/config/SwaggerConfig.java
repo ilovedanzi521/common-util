@@ -37,7 +37,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-@ComponentScan(basePackages = { "com.*"})
 public class SwaggerConfig {
 
 	@Bean
@@ -46,7 +45,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.*"))
+                .apis(RequestHandlerSelectors.basePackage("com.win"))
                 .paths(PathSelectors.any())
                 .build();
     }

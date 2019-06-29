@@ -33,11 +33,6 @@ import feign.RequestTemplate;
 @Configuration
 public class FeignSessionConfig implements RequestInterceptor {
 
-  /*  @Bean
-    public FeignHystrixConcurrencyStrategy feignHystrixConcurrencyStrategy() {
-      return new FeignHystrixConcurrencyStrategy();
-    }*/
-
     @Override
     public void apply(RequestTemplate template) {
 
@@ -53,7 +48,7 @@ public class FeignSessionConfig implements RequestInterceptor {
             return;
         }
         for (Cookie c : cookies) {
-            if (c.getName().equals("SESSION")) {
+            if ("SESSION".equals(c.getName())) {
                 clientSessionID = c.getValue();
                 template.header("Cookie", "SESSION=" + clientSessionID);
             }

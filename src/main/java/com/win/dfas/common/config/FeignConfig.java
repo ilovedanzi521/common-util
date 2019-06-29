@@ -13,14 +13,13 @@
 
 package com.win.dfas.common.config;
 
-import feign.Feign;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcRegistrations;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import feign.Feign;
 
 
 
@@ -37,16 +36,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Configuration
 @ConditionalOnClass({ Feign.class })
 public class FeignConfig {
-	//TODO
-	/*@Bean
-	public WebMvcRegistrations feignWebRegistrations() {
-		return new WebMvcRegistrationsAdapter() {
-			@Override
-			public RequestMappingHandlerMapping getRequestMappingHandlerMapping() {
-				return new FeignRequestMappingHandlerMapping();
-			}
-		};
-	}*/
 
 	private static class FeignRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 		@Override
