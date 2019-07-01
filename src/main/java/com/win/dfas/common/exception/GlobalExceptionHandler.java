@@ -1,5 +1,5 @@
 /****************************************************
- * 创建人：  @author wangkai
+   * 创建人：  @author wangkai
  * 创建时间: 2017-11-8/15:11:24
  * 项目名称: ycmp-api
  * 文件名称: GlobalExceptionHandler.java
@@ -36,16 +36,22 @@ import javax.validation.ConstraintViolationException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    /**
-     * log
-     */
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public WinResponseData defaultErrorHandler(HttpServletRequest req, RuntimeException e) {
-        logger.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError();
+    }
+    
+    @ExceptionHandler(UserAuthException.class)
+    @ResponseBody
+    public WinResponseData userTokenExceptionHandler(HttpServletRequest request, UserAuthException ex) {
+    	
+    	LOGGER.error("url = {}, errMsg ={}", request.getRequestURL(), ex.getMessage());
+    	
+        return WinResponseData.handleAuth(ex.getMessage());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -59,14 +65,14 @@ public class GlobalExceptionHandler {
         }
         String mes = sb.toString();
         String logMsg = invalid.getConstraintViolations().toString();
-        logger.error("url={},errormsg={}",req.getRequestURL().toString(),logMsg);
+        LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(),logMsg);
         return WinResponseData.handleError(mes);
     }
 
     @ExceptionHandler(WinException.class)
     @ResponseBody
     public WinResponseData defaultErrorHandler(HttpServletRequest req,WinException e) {
-        logger.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError(e.getCode(),e.getMsg());
     }
 }

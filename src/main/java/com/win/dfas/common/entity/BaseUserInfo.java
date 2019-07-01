@@ -24,7 +24,9 @@ import java.io.Serializable;
  */
 @Data
 public class BaseUserInfo implements Serializable {
-    private String userId;
+	private static final long serialVersionUID = 1L;
+	
+	private String userId;
     private String departmentCode;
     private String companyCode;
 }

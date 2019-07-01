@@ -7,6 +7,8 @@ import com.win.dfas.common.exception.WinException;
 import com.win.dfas.common.feign.UserFeign;
 import com.win.dfas.common.service.TokenService;
 import com.win.dfas.common.util.RedisUtil;
+import com.win.dfas.common.vo.WinResponseData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +49,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void setBaseUserInfoByToken(HttpServletRequest request) {
-        BaseUserInfo baseUserInfo = userFeign.getInfoFromToken(request.getHeader(CommonConstants.TOKEN_NAME));
-        request.setAttribute(CommonConstants.USER_KEY, baseUserInfo);
+        WinResponseData winResponseData = userFeign.getInfoFromToken(request.getHeader(CommonConstants.TOKEN_NAME));
+        request.setAttribute(CommonConstants.USER_KEY, (BaseUserInfo)winResponseData.getData());
     }
 }
