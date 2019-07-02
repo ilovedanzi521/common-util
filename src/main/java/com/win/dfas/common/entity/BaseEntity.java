@@ -15,6 +15,7 @@ package com.win.dfas.common.entity;
 import java.io.Serializable;
 
 import com.win.dfas.common.util.PrimaryKeyUtil;
+import com.win.dfas.common.util.UserUtil;
 
 import cn.hutool.core.date.DateUtil;
 import lombok.Data;
@@ -44,8 +45,6 @@ public class BaseEntity implements Serializable {
 
 	private String updateTime;
 
-	private BaseUserInfo user;
-
 	/**
 	 *
 	 * @Title: preInsert
@@ -58,7 +57,7 @@ public class BaseEntity implements Serializable {
 	public void preInsert() {
         this.id = PrimaryKeyUtil.generateId();
         this.deleteFlag = 0;
-        this.createUserId = user.getUserId();
+        this.createUserId = UserUtil.getUserId();
         this.createTime = DateUtil.now();
     }
 
@@ -73,7 +72,7 @@ public class BaseEntity implements Serializable {
 	 * @Date:  2019年6月3日/下午6:53:18
 	 */
     public void preUpdate() {
-        this.updateUserId = user.getUserId();
+        this.updateUserId = UserUtil.getUserId();
         this.updateTime = DateUtil.now();
     }
 
