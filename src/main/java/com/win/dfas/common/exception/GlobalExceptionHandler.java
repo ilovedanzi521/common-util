@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public WinResponseData userTokenExceptionHandler(HttpServletRequest request, UserAuthException ex) {
     	
-    	LOGGER.error("url = {}, errMsg ={}", request.getRequestURL(), ex.getMessage());
+    	LOGGER.error("url = {}, errMsg ={}", request.getRequestURL(), ExceptionUtil.stacktraceToString(ex));
     	
         return WinResponseData.handleAuth(ex.getMessage());
     }
