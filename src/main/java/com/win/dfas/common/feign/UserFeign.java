@@ -15,6 +15,7 @@ package com.win.dfas.common.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.alibaba.fastjson.JSONObject;
 import com.win.dfas.common.vo.WinResponseData;
 
 /**
@@ -29,12 +30,12 @@ public interface UserFeign {
     /**
      * @Title: getInfoFromToken
      * @Description: 获取token中的用户信息
-     * @param token
+     * @param jsonObject
      * @return com.win.dfas.common.config.BaseUserInfo
      * @throws
      * @author: zhoujinyin
      * @Date:  2019/6/3/15:08
      */
     @PostMapping("/api/web/userInfo")
-    WinResponseData getInfoFromToken(String token);
+    WinResponseData getInfoFromToken(JSONObject jsonObject);
 }

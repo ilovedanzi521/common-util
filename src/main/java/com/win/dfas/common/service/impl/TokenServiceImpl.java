@@ -1,6 +1,8 @@
 package com.win.dfas.common.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+
+import com.alibaba.fastjson.JSONObject;
 import com.win.dfas.common.constant.CommonConstants;
 import com.win.dfas.common.entity.BaseUserInfo;
 import com.win.dfas.common.exception.WinException;
@@ -49,7 +51,11 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void setBaseUserInfoByToken(HttpServletRequest request) {
-        WinResponseData winResponseData = userFeign.getInfoFromToken(request.getHeader(CommonConstants.TOKEN_NAME));
+    	JSONObject jsonObject = new JSONObject();
+    	
+    	jsonObject.put("token", request.getHeader(CommonConstants.TOKEN_NAME));
+    	
+        WinResponseData winResponseData = userFeign.getInfoFromToken(jsonObject);
         request.setAttribute(CommonConstants.USER_KEY, (BaseUserInfo)winResponseData.getData());
     }
 }
