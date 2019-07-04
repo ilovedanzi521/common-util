@@ -48,9 +48,6 @@ public class BaseReqVO implements Serializable {
 	@ApiModelProperty(value = "请求序列")
 	private Long reqSequence;
 	
-	@ApiModelProperty(value = "用户ID")
-	private String userId;
-	
 	@ApiModelProperty(value = "IP地址")
 	private String ip;
 	
