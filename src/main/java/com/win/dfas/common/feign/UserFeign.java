@@ -38,4 +38,7 @@ public interface UserFeign {
      */
     @PostMapping("/api/web/userInfo")
     WinResponseData getInfoFromToken(JSONObject jsonObject);
+    
+    @PostMapping("/api/feign/user/username")
+    public WinResponseData queryUserName(JSONObject jsonObject);
 }
