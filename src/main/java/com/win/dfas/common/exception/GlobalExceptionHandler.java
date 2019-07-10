@@ -12,17 +12,21 @@
  ********************************************************/
 package com.win.dfas.common.exception;
 
-import cn.hutool.core.exceptions.ExceptionUtil;
-import com.win.dfas.common.vo.WinResponseData;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.win.dfas.common.vo.WinResponseData;
+
+import cn.hutool.core.exceptions.ExceptionUtil;
 
 /**
  *
@@ -41,8 +45,30 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public WinResponseData defaultErrorHandler(HttpServletRequest req, RuntimeException e) {
-    	LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError();
+    }
+    
+    
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseBody
+    public WinResponseData HttpMessageNotReadableExceptionHandler(HttpServletRequest req, RuntimeException e) {
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+        return WinResponseData.handleError("数据类型或格式异常");
+    }
+    
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseBody
+    public WinResponseData numberFormatExceptionHandler(HttpServletRequest req, RuntimeException e) {
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+        return WinResponseData.handleError(e.getMessage());
+    }
+    
+    @ExceptionHandler(InvalidFormatException.class)
+    @ResponseBody
+    public WinResponseData invalidFormatExceptionHandler(HttpServletRequest req, RuntimeException e) {
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+        return WinResponseData.handleError(e.getMessage());
     }
     
     @ExceptionHandler(UserAuthException.class)
