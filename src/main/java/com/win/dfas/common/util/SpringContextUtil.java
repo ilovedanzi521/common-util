@@ -37,7 +37,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	
 	/**
 	 * 
-	 * 获取Bean
+	 * 根据名称和类型获取Bean
 	 * @Title: getBean
 	 * @param name
 	 * @param clazz
@@ -49,6 +49,21 @@ public class SpringContextUtil implements ApplicationContextAware {
 	 */
 	public static <T> T getBean(String name, Class<T> clazz) {
 		return applicationContext.getBean(name, clazz);
+	}
+	
+	/**
+	 * 
+	 * 根据类型获取Bean
+	 * @Title: getBean
+	 * @param clazz
+	 * @return   
+	 * @return: T   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年7月10日/下午6:03:10
+	 */
+	public static <T> T getBean(Class<T> clazz) {
+		return applicationContext.getBean(clazz);
 	}
 	
 	/**

@@ -19,8 +19,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -46,15 +44,7 @@ import cn.hutool.core.util.StrUtil;
  * 创建时间：2019年7月2日/上午10:33:29
  *     
  */
-@Component
 public class UserUtil {
-	
-	private static UserFeign userFeign;
-	
-	@Autowired
-	public UserUtil(UserFeign userFeign) {
-		UserUtil.userFeign = userFeign;
-	}
 	
 	/**
 	 * 
@@ -214,7 +204,7 @@ public class UserUtil {
 		jsonObject.put("userIdList", userIdList);
 		
 		// 调用Feign接口
-		WinResponseData winResponseData = userFeign.queryUserName(jsonObject);
+		WinResponseData winResponseData = SpringContextUtil.getBean(UserFeign.class).queryUserName(jsonObject);
 		
 		if (WinRspType.SUCC.getKey().equals(winResponseData.getWinRspType().getKey())) {
 			
