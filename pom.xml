@@ -13,6 +13,11 @@
     <packaging>jar</packaging>
 
     <description>DFAS公用接口</description>
+    
+    <properties>
+        <java.version>1.8</java.version>
+        <maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
+    </properties>
 
     <dependencies>
 
@@ -85,9 +90,27 @@
 
         <!--swagger SpringFox dependencies -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>io.swagger</artifactId>
+					<groupId>swagger-annotations</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>io.swagger</artifactId>
+					<groupId>swagger-models</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>           
+		    <groupId>io.swagger</groupId>            
+		    <artifactId>swagger-annotations</artifactId>           
+		</dependency>        
+		<dependency>            
+		    <groupId>io.swagger</groupId>            
+		    <artifactId>swagger-models</artifactId>            
+		</dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
