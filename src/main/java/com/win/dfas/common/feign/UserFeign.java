@@ -40,5 +40,5 @@ public interface UserFeign {
     WinResponseData getInfoFromToken(JSONObject jsonObject);
     
     @PostMapping("/api/feign/user/username")
-    public WinResponseData queryUserName(JSONObject jsonObject);
+    WinResponseData queryUserName(JSONObject jsonObject);
 }
