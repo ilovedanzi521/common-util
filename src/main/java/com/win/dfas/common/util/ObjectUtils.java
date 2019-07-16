@@ -17,7 +17,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,20 +153,5 @@ public class ObjectUtils {
 
         return cloneObj;
     }
-
-	public static void getFiled(Class clazz){
-		Field[] fields = clazz.getDeclaredFields();
-		for(Field field:fields){
-			String type =field.getType().getSimpleName();
-			if("Integer".equals(type)||"int".equals(type)){
-				type ="number";
-			}else {
-				if(!"Date".equals(type)){
-					type =  type.toLowerCase();
-				}
-			}
-			System.out.println("public "+field.getName()+": "+type);
-		}
-	}
 
 }

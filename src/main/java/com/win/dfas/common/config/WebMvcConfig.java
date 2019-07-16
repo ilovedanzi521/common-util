@@ -12,13 +12,16 @@
  ********************************************************/
 package com.win.dfas.common.config;
 
-import com.win.dfas.common.interceptor.ApiIdempotentInterceptor;
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.annotation.Resource;
+import com.win.dfas.common.interceptor.ApiIdempotentInterceptor;
+import com.win.dfas.common.util.SpringContextUtil;
 
 /**
  *
@@ -40,12 +43,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         mappings.add("json", "text/html;charset=utf-8");
         container.setMimeMappings(mappings);
     }*/
-    @Resource
-    private ApiIdempotentInterceptor apiIdempotentInterceptor;
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
-        InterceptorRegistration registration = registry.addInterceptor(apiIdempotentInterceptor);
+        InterceptorRegistration registration = registry.addInterceptor(SpringContextUtil.getBean(ApiIdempotentInterceptor.class));
         // 拦截配置
         registration.addPathPatterns("/**");
         // 排除配置
