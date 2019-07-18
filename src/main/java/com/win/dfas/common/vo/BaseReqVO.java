@@ -16,9 +16,9 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.win.dfas.common.entity.BaseUserInfo;
 import com.win.dfas.common.util.LongJsonDeserializer;
 import com.win.dfas.common.util.LongJsonSerializer;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
