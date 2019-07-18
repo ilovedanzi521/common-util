@@ -67,8 +67,4 @@ public class BaseReqVO implements Serializable {
 	
 	@ApiModelProperty(value = "请求每页大小")
 	private Integer reqPageSize;
-	
-	@ApiModelProperty(value = "请求用户")
-	private BaseUserInfo user;
-
 }
