@@ -14,6 +14,7 @@ package com.win.dfas.common.feign;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.win.dfas.common.dto.DicDTO;
 import com.win.dfas.common.vo.WinResponseData;
@@ -27,6 +28,7 @@ import feign.hystrix.FallbackFactory;
  * 创建人：@author lixiuquan
  * 创建时间：2019-7-18/15:57
  */
+@Component
 public class DicFeignHystrix implements FallbackFactory<DicFeign> {
 	
     private static final Logger LOGGER = LoggerFactory.getLogger(DicFeignHystrix.class);
