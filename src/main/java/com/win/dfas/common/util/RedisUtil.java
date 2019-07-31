@@ -1,36 +1,97 @@
 package com.win.dfas.common.util;
 
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Objects;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-import redis.clients.jedis.Jedis;
 
-import javax.annotation.Resource;
+import com.alibaba.fastjson.JSON;
+import com.win.dfas.common.constant.CommonConstants;
+
+import cn.hutool.core.util.ObjectUtil;
+import redis.clients.jedis.Jedis;
 
 /**
  * 包名称：com.example.redis
  * 类名称：RedisUtil
- * 类描述：redis操作工具类
+ * 类描述：REDIS操作工具类
  * 创建人：@author wanglei
  * 创建时间：2019/5/28/16:01
  */
-@Component
 public final class RedisUtil {
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+	
+	@SuppressWarnings("unchecked")
+	private static RedisTemplate<String, Object> redisTemplate = SpringContextUtil.getBean("redisTemplate", RedisTemplate.class);
+	
+	/**
+     * 
+     * 指定缓存失效时间
+     * @Title: expire
+     * @param key 键
+     * @param time 时间(秒)
+     * @return   
+     * @return: boolean   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年7月31日/下午1:40:17
+     */
+    public static boolean expire(String key, long time) {
+        if (time > 0) {
+        	redisTemplate.expire(key, time, TimeUnit.SECONDS);
+        }
+        return true;
+    }
+    
+    /**
+     * 
+     * 根据key获取过期日期
+     * @Title: getExpire
+     * @param key
+     * @return   
+     * @return: Long  时间(秒) 返回0代表为永久有效
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年7月31日/下午1:41:33
+     */
+    public static long getExpire(String key) {
+    	
+    	return redisTemplate.getExpire(key, TimeUnit.SECONDS);
+    }
+    
+    /**
+     * 
+     * 判断key是否存在
+     * @Title: hasKey
+     * @param key
+     * @return   
+     * @return: Boolean   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年7月31日/下午1:43:16
+     */
+    public static boolean hasKey(String key) {
+        return redisTemplate.hasKey(key);
+    }
 
     /**
+     * 
      * 删除缓存
-     * @param key 可以传一个值 或多个
+     * @Title: del
+     * @param key
+     * @return   
+     * @return: long   
+     * @throws
+     * @author: wanglei 
+     * @Date:  2019年7月31日/下午8:18:23
      */
-    public long del(String... key) {
+    public static long del(String... key) {
         if ((key != null) && (key.length > 0)) {
             if (key.length == 1) {
                 if(redisTemplate.delete(key[0])){
@@ -39,43 +100,39 @@ public final class RedisUtil {
                     return 0;
                 }
             } else {
-                return  redisTemplate.delete(CollectionUtils.arrayToList(key));
+                return  redisTemplate.delete(Arrays.asList(key));
             }
         }
         return 0;
     }
-
+    
     /**
-     * 判断key是否存在
-     *
-     * @param key
-     * @return
+     * 
+     * 根据指定的前缀删除数据
+     * @Title: delByPrefix
+     * @param prefix   
+     * @return: void   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年7月31日/下午4:59:24
      */
-    public Boolean exists(String key) {
-        return redisTemplate.hasKey(key);
+    public static void delByPrefix(String prefix) {
+    	
+    	Set<String> keySet = redisTemplate.keys(prefix + CommonConstants.ASTERISK);
+    	
+    	redisTemplate.delete(keySet);
     }
-
-    /**
-     * 指定缓存失效时间
-     * @param key 键
-     * @param time 时间(秒)
-     * @return
-     */
-    public boolean expire(String key, long time) {
-        if (time > 0) {
-            redisTemplate.expire(key, time, TimeUnit.SECONDS);
-        }
-        return true;
-    }
+    
 
     /**
      * 普通缓存获取
      * @param key 键
      * @return 值
      */
-    public Object get(String key) {
+    public static Object get(String key) {
         return (key == null) ? null : redisTemplate.opsForValue().get(key);
     }
+
 
     /**
      * 普通缓存放入并设置时间
@@ -84,13 +141,49 @@ public final class RedisUtil {
      * @param time 时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
-    public boolean set(String key, Object value, long time) {
+    public static boolean set(String key, Object value, long time) {
         if (time > 0) {
-            redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+        	redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
         } else {
-            redisTemplate.opsForValue().set(key, value, 10, TimeUnit.SECONDS);
+        	redisTemplate.opsForValue().set(key, value, 10, TimeUnit.SECONDS);
         }
         return true;
+    }
+    
+    /**
+     * 
+     * 通过管道设置数据
+     * @Title: setByPipelined
+     * @param map
+     * @param expire   
+     * @return: void   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年7月31日/下午2:08:08
+     */
+    public static void setByPipelined(Map<String, Object> map, long expire) {
+    	
+    	redisTemplate.executePipelined(new RedisCallback<Object>() {
+
+			@Override
+			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+				
+				for (Map.Entry<String, Object> entry : map.entrySet()) {
+					
+					if (ObjectUtil.isEmpty(entry.getValue())) {
+						continue;
+					}
+					
+					connection.set(entry.getKey().getBytes(), JSON.toJSONBytes(entry.getValue()));
+					
+					if (expire > 0) {
+						connection.expire(entry.getKey().getBytes(), expire);
+					}
+				}
+				
+				return null;
+			}
+		});
     }
 
     public static final String LOCK_PREFIX = "redis_lock";
@@ -107,7 +200,7 @@ public final class RedisUtil {
      * @param key key值
      * @return 是否获取到
      */
-    public boolean lock(String key){
+    public static boolean lock(String key){
         String lock = LOCK_PREFIX + key;
         String uuid = UUID.randomUUID().toString();
         // 利用lambda表达式
@@ -126,7 +219,7 @@ public final class RedisUtil {
      *
      * @param key
      */
-    public boolean delete(String key) {
+    public static boolean delete(String key) {
         String lock = LOCK_PREFIX + key;
         String uuid = UUID.randomUUID().toString();
         return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {

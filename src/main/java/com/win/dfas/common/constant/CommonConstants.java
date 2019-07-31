@@ -19,6 +19,12 @@ package com.win.dfas.common.constant;
  * 创建时间：2019/6/3/15:14
  */
 public class CommonConstants {
+	
     public static final String TOKEN_NAME = "Authorization";
+    
     public static final String USER_KEY = "user";
+    
+    public static final String HORIZONTAL_LINE = "-"; 
+    
+    public static final String ASTERISK = "*";
 }

@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 public class TokenServiceImpl implements TokenService {
     @Autowired
     private UserFeign userFeign;
-    @Autowired
-    private RedisUtil redisUtil;
 
     @Override
     public void checkToken(HttpServletRequest request) {
@@ -40,11 +38,11 @@ public class TokenServiceImpl implements TokenService {
                 throw new WinException("报文不存在token");
             }
         }
-        if (!redisUtil.lock(token)) {
+        if (!RedisUtil.lock(token)) {
 //          throw new WinException(ResponseCode.REPETITIVE_OPERATION.getMsg());
             throw new WinException("重复操作");
         }
-        if (!redisUtil.delete(token)) {
+        if (!RedisUtil.delete(token)) {
             throw new WinException("重复操作");
         }
     }
