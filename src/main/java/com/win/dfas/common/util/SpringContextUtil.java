@@ -68,6 +68,23 @@ public class SpringContextUtil implements ApplicationContextAware {
 	
 	/**
 	 * 
+	 * 根据名称获取Bean
+	 * @Title: getBean
+	 * @param name
+	 * @return   
+	 * @return: Object   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年8月3日/上午11:39:04
+	 */
+	public static Object getBean(String name) {
+		return applicationContext.getBean(name);
+	}
+	
+	
+	
+	/**
+	 * 
 	 * 获取当前环境
 	 * @Title: getActiveProfile
 	 * @return   
