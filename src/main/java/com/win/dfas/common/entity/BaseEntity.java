@@ -14,6 +14,10 @@ package com.win.dfas.common.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.win.dfas.common.util.LongJsonDeserializer;
+import com.win.dfas.common.util.LongJsonSerializer;
 import com.win.dfas.common.util.PrimaryKeyUtil;
 import com.win.dfas.common.util.UserUtil;
 
@@ -33,6 +37,8 @@ public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonSerialize(using = LongJsonSerializer.class)
+	@JsonDeserialize(using = LongJsonDeserializer.class)
 	private Long id;
 
 	private Integer deleteFlag;
