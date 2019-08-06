@@ -23,6 +23,7 @@ public enum FormatEnum {
 
 	// 格式化枚举
 	DIC_CODE_T_EXPLAIN("SYS_DATA_DICTIONARY-%s-%s", "dicExplain", "根据字典编码转为字典描述"),
+	SECURITY_CODE_T_NAME("PARAM_SECURINTY_BASIC_INFO-%s", "securityName", "根据证券代码转为证券名称"),
 	;
 	
 	private String format;
