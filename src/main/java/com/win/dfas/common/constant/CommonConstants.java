@@ -27,4 +27,6 @@ public class CommonConstants {
     public static final String HORIZONTAL_LINE = "-"; 
     
     public static final String ASTERISK = "*";
+    
+    public static final Integer FORMAT_MAX_LEVEL = 3;
 }

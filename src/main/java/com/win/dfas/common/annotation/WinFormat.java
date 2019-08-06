@@ -34,7 +34,7 @@ public @interface WinFormat {
 
 	FormatEnum value();
 	
-	String formatName();
+	String fromField();
 	
 	String[] prefixParam() default {};
 }

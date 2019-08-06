@@ -23,7 +23,7 @@ import com.win.dfas.common.exception.WinException;
  * 创建时间：2019年7月15日/上午10:19:11
  *     
  */
-public class WinExceptionUtil {
+public final class WinExceptionUtil {
 
 	/**
 	 * 

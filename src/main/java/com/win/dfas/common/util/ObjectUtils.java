@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,6 @@ import com.win.dfas.common.enumeration.FormatEnum;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 
 /**   
  * 包名称： com.win.dfas.common.util 
@@ -237,18 +235,7 @@ public class ObjectUtils {
 	 */
 	public static void formatList(List<?> sourceList, Class<?> clazz) {
 		
-		// 获取类的所有属性
-		Field[] fieldArray = clazz.getDeclaredFields();
-		
-		List<Field> annoFiedlList = new ArrayList<Field>();
-		
-		// 获取有WinFormat注解的属性
-		for (Field field : fieldArray) {
-			
-			if (field.isAnnotationPresent(WinFormat.class)) {
-				annoFiedlList.add(field);
-			}
-		}
+		List<Field> annoFiedlList  = getWinFormatField(clazz);
 		
 		if (CollectionUtil.isEmpty(annoFiedlList)) {
 			return;
@@ -274,18 +261,7 @@ public class ObjectUtils {
 	 */
 	public static void formatObject(Object sourceObject, Class<?> clazz) {
 		
-		// 获取类的所有属性
-		Field[] fieldArray = clazz.getDeclaredFields();
-		
-		List<Field> annoFiedlList = new ArrayList<Field>();
-		
-		// 获取有WinFormat注解的属性
-		for (Field field : fieldArray) {
-			
-			if (field.isAnnotationPresent(WinFormat.class)) {
-				annoFiedlList.add(field);
-			}
-		}
+		List<Field> annoFiedlList  = getWinFormatField(clazz);
 		
 		if (CollectionUtil.isEmpty(annoFiedlList)) {
 			return;
@@ -325,23 +301,15 @@ public class ObjectUtils {
 					// 获取注解枚举
 					FormatEnum formatEnum = winFormat.value();
 					
-					// 格式化KEY
-					String formatKey = formatEnum.getFormat();
+					// 获取数据来源属性名称
+					String fromFieldName = winFormat.fromField();
 					
-					// 获取注解属性名
-					String formatName = winFormat.formatName();
+					// 获取数据来源属性值
+					Object fromFieldValue = ReflectUtil.getFieldObject(sourceObject, fromFieldName);
 					
-					// 获取属性值
-					Object propObject = field.get(sourceObject);
-					
-					if (StrUtil.isEmpty(formatName)) {
+					if (ObjectUtil.isEmpty(fromFieldValue)) {
 						continue;
 					}
-					
-					String methodName = "set" + formatName.substring(0, 1).toUpperCase() + formatName.substring(1);
-					
-					// 获取注入方法名
-					Method setMethod = clazz.getMethod(methodName, String.class);
 					
 					// 参数对象处理
 					Object[] paramObjects = new Object[winFormat.prefixParam().length + 1];
@@ -350,9 +318,10 @@ public class ObjectUtils {
 						System.arraycopy(winFormat.prefixParam(), 0, paramObjects, 0, paramObjects.length - 1);
 					} 
 					
-					paramObjects[paramObjects.length - 1] = propObject;
+					paramObjects[paramObjects.length - 1] = fromFieldValue;
 					
 					// 获取REDIS对应的值
+					String formatKey = formatEnum.getFormat();
 					Object redisObject = RedisUtil.get(String.format(formatKey, paramObjects));
 					
 					if (ObjectUtil.isEmpty(redisObject)) {
@@ -370,7 +339,8 @@ public class ObjectUtils {
 						continue;
 					}
 					
-					setMethod.invoke(sourceObject, redisMapValue.toString());
+					// 设置属性值
+					field.set(sourceObject, redisMapValue);
 					
 				} catch (Exception e) {
 					LOGGER.error(ExceptionUtil.getMessage(e));
@@ -381,6 +351,35 @@ public class ObjectUtils {
 			LOGGER.error(ExceptionUtil.getMessage(e));
 			throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_EXCEPTION);
 		}
+	}
+	
+	/**
+	 * 
+	 * 获取WinFormat注解属性
+	 * @Title: getWinFormatField
+	 * @param clazz
+	 * @return   
+	 * @return: List<Field>   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年8月6日/下午4:48:03
+	 */
+	private static List<Field> getWinFormatField(Class<?> clazz) {
+		
+		List<Field> annoFiedlList = new ArrayList<Field>();
+		
+		// 获取类的所有属性
+		Field[] fieldArray = clazz.getDeclaredFields();
+		
+		// 获取有WinFormat注解的属性
+		for (Field field : fieldArray) {
+			
+			if (field.isAnnotationPresent(WinFormat.class)) {
+				annoFiedlList.add(field);
+			}
+		}
+		
+		return annoFiedlList;
 	}
 	
 }
