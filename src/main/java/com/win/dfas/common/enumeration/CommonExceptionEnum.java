@@ -26,6 +26,7 @@ public enum CommonExceptionEnum implements IExceptionEnum {
 
 	// 指令管理异常枚举
 	FEIGN_EXCEPTION("100100", "Feign调用异常[%s]"),
+	FORMAT_EXCEPTION("100101", "数据转换异常"),
 	;
 
 	private String code;
