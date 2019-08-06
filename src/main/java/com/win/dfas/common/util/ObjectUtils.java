@@ -129,7 +129,7 @@ public class ObjectUtils {
 		PageInfo<T> resultPageInfo = new PageInfo<T>();
 				
 		// 分页对象拷贝
-		copyPageInfo(sourcePageInfo, clazz, false);
+		resultPageInfo = copyPageInfo(sourcePageInfo, clazz, false);
 		
 		return (PageInfo<T>)resultPageInfo;
 		
