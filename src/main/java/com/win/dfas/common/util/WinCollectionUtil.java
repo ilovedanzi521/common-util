@@ -48,7 +48,7 @@ public final class WinCollectionUtil {
 			return null;
 		}
 		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>(16);
 		
 		for (Map<String, Object> map : list) {
 			

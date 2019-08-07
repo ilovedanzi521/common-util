@@ -198,7 +198,7 @@ public class UserUtil {
 			return null;
 		}
 		
-		Map<String, String> resultMap = new HashMap<String, String>();
+		Map<String, String> resultMap = new HashMap<String, String>(16);
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("userIdList", userIdList);

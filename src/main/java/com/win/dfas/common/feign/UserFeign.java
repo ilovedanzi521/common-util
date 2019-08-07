@@ -27,9 +27,11 @@ import com.win.dfas.common.vo.WinResponseData;
  */
 @FeignClient("dfas-auth-center")
 public interface UserFeign {
+	
     /**
+     * 
+     * 获取token中的用户信息
      * @Title: getInfoFromToken
-     * @Description: 获取token中的用户信息
      * @param jsonObject
      * @return com.win.dfas.common.config.BaseUserInfo
      * @throws
@@ -39,6 +41,17 @@ public interface UserFeign {
     @PostMapping("/api/web/userInfo")
     WinResponseData getInfoFromToken(JSONObject jsonObject);
     
+    /**
+     * 
+     * 获取用户名
+     * @Title: queryUserName
+     * @param jsonObject
+     * @return   
+     * @return: WinResponseData   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年8月7日/上午11:30:56
+     */
     @PostMapping("/api/feign/user/username")
     WinResponseData queryUserName(JSONObject jsonObject);
 }

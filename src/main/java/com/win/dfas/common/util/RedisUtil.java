@@ -187,7 +187,7 @@ public final class RedisUtil {
     }
 
     public static final String LOCK_PREFIX = "redis_lock";
-    public static final int LOCK_EXPIRE = 1000*10; // ms
+    public static final int LOCK_EXPIRE = 1000*10;
     private static final Long RELEASE_SUCCESS = 1L;
     private static final String LOCK_SUCCESS = "OK";
     private static final String SET_IF_NOT_EXIST = "NX";

@@ -10,11 +10,23 @@ import javax.servlet.http.HttpServletRequest;
  * 创建时间：2019/5/28/13:37
  */
 public interface TokenService {
+	
+	/**
+	 * 
+	 * token校验
+	 * @Title: checkToken
+	 * @param request   
+	 * @return: void   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年8月7日/上午11:31:21
+	 */
     void checkToken(HttpServletRequest request) ;
 
     /**
+     * 
+     * 设置基本用户信息
      * @Title: getUserToken
-     * @Description: 设置基本用户信息
      * @param request
      * @return
      * @throws

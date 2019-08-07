@@ -32,14 +32,16 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public void checkToken(HttpServletRequest request) {
         String token = request.getHeader(CommonConstants.TOKEN_NAME);
-        if (StrUtil.isBlank(token)) {        // header中不存在token
+        
+        // header中不存在token
+        if (StrUtil.isBlank(token)) {        
             token = request.getParameter(CommonConstants.TOKEN_NAME);
-            if (StrUtil.isBlank(token)) {    // parameter中也不存在token
+            // parameter中也不存在token
+            if (StrUtil.isBlank(token)) {    
                 throw new WinException("报文不存在token");
             }
         }
         if (!RedisUtil.lock(token)) {
-//          throw new WinException(ResponseCode.REPETITIVE_OPERATION.getMsg());
             throw new WinException("重复操作");
         }
         if (!RedisUtil.delete(token)) {

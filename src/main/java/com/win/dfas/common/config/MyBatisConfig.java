@@ -39,7 +39,13 @@ import java.sql.SQLException;
 
 
 /**
- * @Description: Mybatis基础配置
+ * Mybatis基础配置
+ * 包名称： com.win.dfas.common.config 
+ * 类名称：MyBatisConfig 
+ * 类描述：TODO
+ * 创建人：@author wanglei 
+ * 创建时间：2019年8月7日/上午11:32:24
+ *
  */
 @Configuration
 @MapperScan(basePackages = "com.win.**.dao", sqlSessionFactoryRef = "defaultSqlSessionFactory")

@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
-    public WinResponseData HttpMessageNotReadableExceptionHandler(HttpServletRequest req, RuntimeException e) {
+    public WinResponseData httpMessageNotReadableExceptionHandler(HttpServletRequest req, RuntimeException e) {
     	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError("数据类型或格式异常");
     }
