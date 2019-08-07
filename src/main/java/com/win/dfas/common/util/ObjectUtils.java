@@ -98,7 +98,7 @@ public class ObjectUtils {
 			
 			// 格式化数据
 			if (format) {
-				formatList(sourceList, clazz);
+				formatList(resultList, clazz);
 			}
 			
 		} catch (InstantiationException e) {
@@ -164,7 +164,7 @@ public class ObjectUtils {
 			List<T> targetLsit = copyPropertiesList(sourceList, clazz);
 			
 			// 数据格式化
-			formatList(sourceList, clazz);
+			formatList(targetLsit, clazz);
 			
 			resultPageInfo.setList(targetLsit);
 		} catch (Exception e) {
