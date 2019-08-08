@@ -12,9 +12,10 @@
 package com.win.dfas.common.util;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.win.dfas.common.constant.CommonConstants;
-import com.win.dfas.common.enumeration.CommonExceptionEnum;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -34,49 +35,101 @@ public class ReflectUtil {
 	 * 根据属性名获取对象中的属性值
 	 * @Title: getFieldObject
 	 * @param object
-	 * @param filedName
+	 * @param filedName 多个点号分隔
 	 * @return
 	 * @throws Exception   
 	 * @return: Object   
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 * @throws NoSuchFieldException 
 	 * @throws
 	 * @author: hechengcheng 
 	 * @Date:  2019年8月6日/下午7:17:27
 	 */
-	public static Object getFieldObject(Object object, String filedName) throws Exception {
+	public static Object getFieldObject(Object object, String fieldName) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException {
 		
-		if (ObjectUtil.isEmpty(object) || StrUtil.isEmpty(filedName)) {
+		if (ObjectUtil.isEmpty(object) || StrUtil.isEmpty(fieldName)) {
 			return null;
 		}
 		
-		Object resultObjct = null;
-		
 		// 属性字段拆分
-		String[] filedArray = filedName.split("\\.");
+		String[] filedArray = fieldName.split(CommonConstants.TRANSFERRED_DOT);
 		
-		Class<?> clazz = object.getClass();
+		// 遍历的Object
+		Object resultObjct = object;
+		Field fField = null;
 		
-		if (filedArray.length > CommonConstants.FORMAT_MAX_LEVEL) {
-			throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_MAX_LEVEL_FIELD, CommonConstants.FORMAT_MAX_LEVEL);
+		for (String fFieldName: filedArray) {
+			fField = getField(resultObjct.getClass(), fFieldName);
+			
+			if (ObjectUtil.isEmpty(fField)) {
+				break;
+			}
+			
+			fField.setAccessible(true);
+			
+			resultObjct = fField.get(resultObjct);
 		}
-		
-		String iFieldName = filedArray[0];
-		Field field = clazz.getDeclaredField(iFieldName);
-		
-		if (ObjectUtil.isEmpty(field)) {
-			return resultObjct;
-		}
-		
-		field.setAccessible(true);
-		
-		resultObjct = field.get(object);
-		
-		// 递归调用
-		if (filedArray.length > 1) {
-			resultObjct = getFieldObject(resultObjct, filedName.substring(filedName.indexOf(".") + 1));
-		} 
 		
 		return resultObjct;
 	}
 	
+	/**
+	 * 
+	 * 根据指定类和属性名获取属性字段
+	 * @Title: getField
+	 * @param clazz
+	 * @param fieldName
+	 * @return
+	 * @throws NoSuchFieldException   
+	 * @return: Field   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年8月8日/下午3:59:38
+	 */
+	public static Field getField(Class<?> clazz, String fieldName) throws NoSuchFieldException {
+		
+		Field field = null;
+		
+		if (ObjectUtil.isEmpty(clazz) || StrUtil.isEmpty(fieldName)) {
+			return null;
+		}
+		
+		field = clazz.getDeclaredField(fieldName);
+		
+		return field;
+	}
+	
+	/**
+	 * 
+	 * 获取指定类所有属性
+	 * @Title: getAllField
+	 * @param clazz
+	 * @return   
+	 * @return: List<Field>   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年8月6日/下午4:48:03
+	 */
+	public static List<Field> getAllField(Class<?> clazz) {
+		
+		List<Field> fiedlList = new ArrayList<Field>();
+		
+		// 递归获取类(包含父类)属性
+		while (clazz != null) {
+			
+			// 获取类的所有属性
+			Field[] fieldArray = clazz.getDeclaredFields();
+			
+			// 获取属性
+			for (Field field : fieldArray) {
+				fiedlList.add(field);
+			}
+			
+			clazz = clazz.getSuperclass();
+		}
+		
+		return fiedlList;
+	}
 }
 

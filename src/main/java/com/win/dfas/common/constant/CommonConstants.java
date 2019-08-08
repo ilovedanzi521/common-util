@@ -28,5 +28,9 @@ public class CommonConstants {
     
     public static final String ASTERISK = "*";
     
+    public static final String DOT = ".";
+    
+    public static final String TRANSFERRED_DOT = "\\.";
+    
     public static final Integer FORMAT_MAX_LEVEL = 3;
 }

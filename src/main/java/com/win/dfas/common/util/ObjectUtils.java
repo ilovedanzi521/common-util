@@ -19,8 +19,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,7 @@ import org.springframework.beans.BeanUtils;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.win.dfas.common.annotation.WinFormat;
+import com.win.dfas.common.constant.CommonConstants;
 import com.win.dfas.common.enumeration.CommonExceptionEnum;
 import com.win.dfas.common.enumeration.FormatEnum;
 
@@ -164,7 +167,9 @@ public class ObjectUtils {
 			List<T> targetLsit = copyPropertiesList(sourceList, clazz);
 			
 			// 数据格式化
-			formatList(targetLsit, clazz);
+			if (format) {
+				formatList(targetLsit, clazz);
+			}
 			
 			resultPageInfo.setList(targetLsit);
 		} catch (Exception e) {
@@ -177,8 +182,8 @@ public class ObjectUtils {
 	
 	/**
 	 * 
+	 * 对象深度克隆
 	 * @Title: clone
-	 * @Description: 对象深度克隆
 	 * @param srcObj 源对象
 	 * @return   
 	 * @return: Object 克隆对象
@@ -235,15 +240,16 @@ public class ObjectUtils {
 	 */
 	public static void formatList(List<?> sourceList, Class<?> clazz) {
 		
-		List<Field> annoFiedlList  = getWinFormatField(clazz);
+		// 获取注解属性
+		Map<Field, Field> annoFieldMap = getWinFormatField(clazz);
 		
-		if (CollectionUtil.isEmpty(annoFiedlList)) {
+		if (CollectionUtil.isEmpty(annoFieldMap)) {
 			return;
 		}
 		
 		// 遍历格式化数据
 		for (Object sourceObject : sourceList) {
-			formatObjectByAnnotation(sourceObject, clazz, annoFiedlList);
+			formatObjectByAnnotation(sourceObject, clazz, annoFieldMap);
 		}
 	}
 	
@@ -261,14 +267,15 @@ public class ObjectUtils {
 	 */
 	public static void formatObject(Object sourceObject, Class<?> clazz) {
 		
-		List<Field> annoFiedlList  = getWinFormatField(clazz);
+		// 获取注解属性
+		Map<Field, Field> annoFieldMap = getWinFormatField(clazz);
 		
-		if (CollectionUtil.isEmpty(annoFiedlList)) {
+		if (CollectionUtil.isEmpty(annoFieldMap)) {
 			return;
 		}
 		
 		// 格式化数据
-		formatObjectByAnnotation(sourceObject, clazz, annoFiedlList);
+		formatObjectByAnnotation(sourceObject, clazz, annoFieldMap);
 	}
 	
 	/**
@@ -277,109 +284,142 @@ public class ObjectUtils {
 	 * @Title: formatObjectByAnnotation
 	 * @param sourceObject 格式化对象
 	 * @param clazz 格式化对象类
-	 * @param annoFiedlList  注解列表 
+	 * @param annoFiedlMap 注解属性键值对
 	 * @return: void   
 	 * @throws
 	 * @author: hechengcheng 
 	 * @Date:  2019年8月6日/上午10:42:39
 	 */
-	private static void formatObjectByAnnotation(Object sourceObject, Class<?> clazz, List<Field> annoFiedlList) {
+	private static void formatObjectByAnnotation(Object sourceObject, Class<?> clazz, Map<Field, Field> annoFiedlMap) {
 		
 		try {
 			
-			if (CollectionUtil.isEmpty(annoFiedlList)) {
+			if (CollectionUtil.isEmpty(annoFiedlMap)) {
 				return;
 			}
 			
-			for (Field field : annoFiedlList) {
+			// 遍历设置属性值
+			for (Map.Entry<Field, Field> entry : annoFiedlMap.entrySet()) {
 				
-				try {
-					field.setAccessible(true);
-					
-					WinFormat winFormat = field.getAnnotation(WinFormat.class);
-					
-					// 获取注解枚举
-					FormatEnum formatEnum = winFormat.value();
-					
-					// 获取数据来源属性名称
-					String fromFieldName = winFormat.fromField();
-					
-					// 获取数据来源属性值
-					Object fromFieldValue = ReflectUtil.getFieldObject(sourceObject, fromFieldName);
-					
-					if (ObjectUtil.isEmpty(fromFieldValue)) {
-						continue;
-					}
-					
-					// 参数对象处理
-					Object[] paramObjects = new Object[winFormat.prefixParam().length + 1];
-					
-					if (winFormat.prefixParam().length > 0) {
-						System.arraycopy(winFormat.prefixParam(), 0, paramObjects, 0, paramObjects.length - 1);
-					} 
-					
-					paramObjects[paramObjects.length - 1] = fromFieldValue;
-					
-					// 获取REDIS对应的值
-					String formatKey = formatEnum.getFormat();
-					Object redisObject = RedisUtil.get(String.format(formatKey, paramObjects));
-					
-					if (ObjectUtil.isEmpty(redisObject)) {
-						continue;
-					}
-					
-					// REDIS值转换
-					@SuppressWarnings("unchecked")
-					Map<String, Object> redisMap = JSON.parseObject(JSON.toJSONString(redisObject), Map.class);
-					
-					// 获取解析值
-					Object redisMapValue = redisMap.get(String.format(formatEnum.getKey()));
-					
-					if (ObjectUtil.isEmpty(redisMapValue)) {
-						continue;
-					}
-					
-					// 设置属性值
-					field.set(sourceObject, redisMapValue);
-					
-				} catch (Exception e) {
-					LOGGER.error(ExceptionUtil.getMessage(e));
-					throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_EXCEPTION);
+				// 需要格式化的属性
+				Field formatField = entry.getKey();
+				
+				// 获取格式化属性注解
+				WinFormat winFormat = formatField.getAnnotation(WinFormat.class);
+				
+				// 格式化数据来源属性
+				Field fromField = entry.getValue();
+				
+				// 设置可访问
+				formatField.setAccessible(true);
+				
+				if (ObjectUtil.isNotEmpty(fromField)) {
+					fromField.setAccessible(true);
 				}
+				
+				Object fromFieldValue = null;
+				
+				// 获取数据来源属性值
+				if (winFormat.fromField().indexOf(CommonConstants.DOT) < 0) {
+					fromFieldValue = fromField.get(sourceObject);
+				} else {
+					// 多层级结构遍历获取
+					fromFieldValue = ReflectUtil.getFieldObject(sourceObject, winFormat.fromField());
+				}
+				
+				if (ObjectUtil.isEmpty(fromFieldValue)) {
+					continue;
+				}
+				
+				// 参数对象处理
+				Object[] paramObjects = new Object[winFormat.prefixParam().length + 1];
+				
+				if (winFormat.prefixParam().length > 0) {
+					System.arraycopy(winFormat.prefixParam(), 0, paramObjects, 0, paramObjects.length - 1);
+				} 
+				
+				paramObjects[paramObjects.length - 1] = fromFieldValue;
+				
+				// 获取注解枚举
+				FormatEnum formatEnum = winFormat.value();
+				
+				// 获取REDIS对应的值
+				String formatKey = formatEnum.getFormat();
+				
+				Object redisObject = RedisUtil.get(String.format(formatKey, paramObjects));
+				
+				if (ObjectUtil.isEmpty(redisObject)) {
+					continue;
+				}
+				
+				// REDIS值转换
+				@SuppressWarnings("unchecked")
+				Map<String, Object> redisMap = JSON.parseObject(JSON.toJSONString(redisObject), Map.class);
+				
+				// 获取解析值
+				Object redisMapValue = redisMap.get(String.format(formatEnum.getKey()));
+				
+				if (ObjectUtil.isEmpty(redisMapValue)) {
+					continue;
+				}
+				
+				// 设置属性值
+				formatField.set(sourceObject, redisMapValue);
 			}
-		} catch (Exception e) {
-			LOGGER.error(ExceptionUtil.getMessage(e));
+		} catch (NoSuchFieldException e) {
+			LOGGER.error(ExceptionUtil.stacktraceToString(e));
+			throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_EXCEPTION);
+		} catch (IllegalArgumentException e) {
+			LOGGER.error(ExceptionUtil.stacktraceToString(e));
+			throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_EXCEPTION);
+		} catch (IllegalAccessException e) {
+			LOGGER.error(ExceptionUtil.stacktraceToString(e));
 			throw WinExceptionUtil.winException(CommonExceptionEnum.FORMAT_EXCEPTION);
 		}
 	}
 	
+	
 	/**
 	 * 
-	 * 获取WinFormat注解属性
+	 * 获取WinFormat的注解属性和其依赖属性
 	 * @Title: getWinFormatField
 	 * @param clazz
 	 * @return   
-	 * @return: List<Field>   
+	 * @return: Map<Field,Field> Map<注解属性,依赖属性>  
 	 * @throws
 	 * @author: hechengcheng 
-	 * @Date:  2019年8月6日/下午4:48:03
+	 * @Date:  2019年8月8日/上午9:13:11
 	 */
-	private static List<Field> getWinFormatField(Class<?> clazz) {
+	private static Map<Field, Field> getWinFormatField(Class<?> clazz) {
 		
-		List<Field> annoFiedlList = new ArrayList<Field>();
+		Map<Field, Field> annoFieldMap = null;
 		
-		// 获取类的所有属性
-		Field[] fieldArray = clazz.getDeclaredFields();
+		// 获取类所有属性
+		List<Field> fieldList = ReflectUtil.getAllField(clazz);
 		
-		// 获取有WinFormat注解的属性
-		for (Field field : fieldArray) {
+		if (CollectionUtil.isEmpty(fieldList)) {
+			return null;
+		}
+		
+		annoFieldMap = new HashMap<Field, Field>(16);
+		
+		// List转Map
+		Map<String, Field> mapField = fieldList.stream().collect(Collectors.toMap(Field::getName, a -> a, (k1, k2) -> k1));
+		
+		for (Map.Entry<String, Field> entry : mapField.entrySet()) {
 			
+			Field field = entry.getValue();
+			
+			// 判断是否WinFormat注解
 			if (field.isAnnotationPresent(WinFormat.class)) {
-				annoFiedlList.add(field);
+				
+				WinFormat winFormat = field.getAnnotation(WinFormat.class);
+				
+				annoFieldMap.put(field, mapField.get(winFormat.fromField()));
 			}
 		}
 		
-		return annoFiedlList;
+		return annoFieldMap;
 	}
 	
 }
