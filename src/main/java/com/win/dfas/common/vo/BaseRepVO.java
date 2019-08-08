@@ -16,8 +16,11 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.win.dfas.common.annotation.WinFormat;
+import com.win.dfas.common.enumeration.FormatEnum;
 import com.win.dfas.common.util.LongJsonDeserializer;
 import com.win.dfas.common.util.LongJsonSerializer;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -43,6 +46,7 @@ public class BaseRepVO implements Serializable {
 	private String createUserId;
 	
 	@ApiModelProperty(value = "创建用户名")
+	@WinFormat(value = FormatEnum.SYS_USER_ID_T_NAME, fromField = "createUserId")
 	private String createUserName;
 	
 	@ApiModelProperty(value = "创建时间")
@@ -52,6 +56,7 @@ public class BaseRepVO implements Serializable {
 	private String updateUserId;
 	
 	@ApiModelProperty(value = "更新用户名")
+	@WinFormat(value = FormatEnum.SYS_USER_ID_T_NAME, fromField = "updateUserId")
 	private String updateUserName;
 	
 	@ApiModelProperty(value = "更新时间")

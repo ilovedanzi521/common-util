@@ -23,6 +23,7 @@ public enum FormatEnum {
 
 	// 格式化枚举
 	DIC_CODE_T_EXPLAIN("SYS_DATA_DICTIONARY-%s-%s", "dicExplain", "根据字典编码转为字典描述"),
+    SYS_USER_ID_T_NAME("SYS_USER-%s", "userName", "根据用户ID转为用户名称"),
 	SECURITY_CODE_T_NAME("PARAM_SECURINTY_BASIC_INFO-%s", "securityName", "根据证券代码转为证券名称"),
 	FUND_NO_T_NAME("PROD_FUND_INFO-%s", "fundName", "根据产品序号转为产品名称"),
 	PORTFOLIO_NO_T_NAME("PROD_PORTFOLIO-%s", "portfolioName", "根据组合序号转为组合名称"),
