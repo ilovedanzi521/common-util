@@ -29,6 +29,8 @@ public enum FormatEnum {
 	PORTFOLIO_NO_T_NAME("PROD_PORTFOLIO-%s", "portfolioName", "根据组合序号转为组合名称"),
 	TRADEDIRECTION_CODE_T_NAME("PARAM_TRANSACTION_DIRECTION-%s", "transactionDirectionName", "根据交易方向代码转为交易方向名称"),
 	TRADEDIRECTION_CODE_T_DECLAREPATH("PARAM_TRANSACTION_DIRECTION-%s", "declarePath", "根据交易方向代码转为申报方向"),
+	TRADEDIRECTION_CODE_T_MARKETCODENAME("PARAM_TRANSACTION_DIRECTION-%s", "marketCodeName", "根据交易方向代码转为交易市场名称"),
+	TRADEDIRECTION_CODE_T_DECLAREPATHNAME("PARAM_TRANSACTION_DIRECTION-%s", "declarePathName", "根据交易方向代码转为申报方向名称"),
 	;
 	
 	private String format;
