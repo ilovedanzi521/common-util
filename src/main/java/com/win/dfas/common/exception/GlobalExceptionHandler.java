@@ -18,7 +18,10 @@ import javax.validation.ConstraintViolationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +30,8 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.win.dfas.common.vo.WinResponseData;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
+
+import java.util.stream.Collectors;
 
 /**
  *
@@ -48,8 +53,21 @@ public class GlobalExceptionHandler {
     	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
         return WinResponseData.handleError();
     }
-    
-    
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public WinResponseData validationErrorHandler  (HttpServletRequest req, Exception e) {
+        LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+        MethodArgumentNotValidException t = (MethodArgumentNotValidException) e;
+        String msg = getBindingResultMsg(t.getBindingResult());
+        return WinResponseData.handleError(msg);
+    }
+
+    private String getBindingResultMsg(BindingResult result) {
+        return result.getAllErrors().stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining(","));
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
     public WinResponseData httpMessageNotReadableExceptionHandler(HttpServletRequest req, RuntimeException e) {
