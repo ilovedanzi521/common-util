@@ -41,5 +41,23 @@ public class SysRedisCache extends BaseEntity {
 	 */
 	private String cacheSql;
 	
+	/**
+	 * 缓存结果: 0-成功、1-失败
+	 */
+	private Integer cacheResult;
 
+	/**
+	 * 缓存时间
+	 */
+	private String cacheTime;
+
+	/**
+	 * 缓存条数
+	 */
+	private Integer cacheRow;
+
+	/**
+	 * 缓存耗时(毫秒)
+	 */
+	private Long cacheCostTime;
 }
