@@ -426,4 +426,9 @@ public final class DicConstants {
 	 * 指令业务分类
 	 */
 	public static final String PDIC_1000295 = "1000295";
+	
+	/**
+	 * 网下新债确认状态
+	 */
+	public static final String PDIC_1000296 = "1000296";
 }

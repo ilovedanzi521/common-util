@@ -30,6 +30,8 @@ public enum FormatEnum {
 	TRADEDIRECTION_CODE_T_NAME("PARAM_TRANSACTION_DIRECTION-%s", "transactionDirectionName", "根据交易方向代码转为交易方向名称"),
 	TRADEDIRECTION_CODE_T_MARKETCODENAME("PARAM_TRANSACTION_DIRECTION-%s", "marketCodeName", "根据交易方向代码转为交易市场名称"),
 	TRADEDIRECTION_CODE_T_DECLAREPATHNAME("PARAM_TRANSACTION_DIRECTION-%s", "declarePathName", "根据交易方向代码转为申报方向名称"),
+	STOCKHOLDER_CODE_T_NAME("PROD_STOCKHOLDER-%s", "stockholderName", "根据股东代码转为股东名称"),
+	SEAT_CODE_T_NAME("PROD_SEAT-%s", "seatName", "根据席位代码转为席位名称"),
 	;
 	
 	private String format;
