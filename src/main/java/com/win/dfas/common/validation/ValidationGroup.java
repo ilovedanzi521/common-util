@@ -23,6 +23,10 @@ package com.win.dfas.common.validation;
 public interface ValidationGroup {
 	
 	public interface Default {}
+	
+	public interface Query {}
+	
+	public interface PageQuery {}
 
 	public interface Add {}
 	

@@ -13,8 +13,6 @@ package com.win.dfas.common.vo;
 
 import java.io.Serializable;
 
-import io.swagger.annotations.ApiModelProperty;
-
 /**   
  * 包名称： com.win.dfas.common.vo 
  * 类名称：BaseUpdateReqVO 
@@ -26,8 +24,5 @@ import io.swagger.annotations.ApiModelProperty;
 public class BaseUpdateReqVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@ApiModelProperty(value = "主键ID")
-	private Long id;
 
 }
