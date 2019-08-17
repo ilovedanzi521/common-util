@@ -9,8 +9,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import com.win.dfas.common.enumeration.EmunParam;
-
 
 /**
  * 
@@ -31,6 +29,8 @@ public @interface IsEnumParamValid {
 	Class<?>[] groups() default {};
 
 	Class<? extends Payload>[] payload() default {};
-	//业务传入枚举类型需进行检验的参数
-	EmunParam emunType();
+	
+	Class<? extends Enum<?>> enumClass();
+    
+	String enumName();
 }

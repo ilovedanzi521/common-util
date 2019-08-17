@@ -1,9 +1,12 @@
 package com.win.dfas.common.validation;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.win.dfas.common.enumeration.EmunParam;
+import com.win.dfas.common.enumeration.IEmunParam;
 /**
  * 
  * 包名称： com.win.dfas.common.validation 
@@ -14,22 +17,34 @@ import com.win.dfas.common.enumeration.EmunParam;
  *
  */
 public class IsEnumParamValidator implements ConstraintValidator<IsEnumParamValid, Object> {
-	
-	private EmunParam emunType;
+	/**
+	 * 对应的枚举类
+	 */
+	private Class<? extends Enum<?>> enumClass;
+	/**
+	 * 对应的枚举名称
+	 */
+	private String enumName;
+
 	@Override
 	public void initialize(IsEnumParamValid isEnumParamValid) {
-       this.emunType = isEnumParamValid.emunType();
+		this.enumClass = isEnumParamValid.enumClass();
+		this.enumName = isEnumParamValid.enumName();
 	}
 
 	@Override
-	public boolean isValid(Object arg, ConstraintValidatorContext context) {
-		  //对比枚举类中是否存在该枚举值
-		  for(EmunParam emun:EmunParam.values()) {
-			  if(emun.compareTo(this.emunType) > 0 && emun.getEmunValue().equals(arg)) {
-				  return true;
-			  }
-		  }
-		return false;
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		Class<?> clazz = IEmunParam.class;
+		Object[] oo = enumClass.getEnumConstants();
+		try {
+			Method method = clazz.getMethod("emunIsValid", this.enumName.getClass(), value.getClass());
+			Boolean result = (Boolean) method.invoke(oo[0], this.enumName, value);
+			return result == null ? false : result;
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			return false;
+		} catch (NoSuchMethodException | SecurityException e) {
+			return false;
+		}
 	}
 
 }

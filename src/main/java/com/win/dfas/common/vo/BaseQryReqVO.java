@@ -13,6 +13,7 @@ package com.win.dfas.common.vo;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.win.dfas.common.validation.ValidationGroup;
@@ -34,11 +35,13 @@ public class BaseQryReqVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ApiModelProperty(value = "请求当前页数")
-	@NotNull(message = "请求当前页数", groups = {ValidationGroup.PageQuery.class})
+	@Min(message = "请求当前页数必须为大于0", value = 1, groups = {ValidationGroup.PageQuery.class})
+	@NotNull(message = "请求当前页数不能为空", groups = {ValidationGroup.PageQuery.class})
 	private Integer reqPageNum;
 	
 	@ApiModelProperty(value = "请求每页大小")
-	@NotNull(message = "请求每页大小", groups = {ValidationGroup.PageQuery.class})
+	@Min(message = "请求每页大小必须大于0", value = 1, groups = {ValidationGroup.PageQuery.class})
+	@NotNull(message = "请求每页大小不能为空", groups = {ValidationGroup.PageQuery.class})
 	private Integer reqPageSize;
 
 }

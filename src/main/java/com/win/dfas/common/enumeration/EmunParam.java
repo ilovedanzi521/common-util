@@ -8,10 +8,10 @@ package com.win.dfas.common.enumeration;
  * 创建时间：2019年8月14日/上午10:40:58
  *
  */
-public enum EmunParam {
+	
+public enum EmunParam implements IEmunParam {
 	
 	PROD_CONSIGNOR_TYPE_NO("1", "产品管理委托人目录一级委托人类别");
-	
 
     /**
      * 枚举对应的编号
@@ -44,5 +44,25 @@ public enum EmunParam {
 		this.emunDec = emunDec;
 	}
 	
+
+	/**
+     * 
+     * @Title: emunIsValid
+     * @Description: 进行名称校验及值的校验
+     * @param name
+     * @param value
+     * @return: boolean   
+     * @throws
+     * @author: tandun 
+     * @Date:  2019年8月16日/上午11:42:31
+     */
+	public boolean emunIsValid(String name, String value) {
+		for (EmunParam emunParam : EmunParam.values()) {
+			if (emunParam.name().equals(name) && emunParam.getEmunValue().equals(value)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
