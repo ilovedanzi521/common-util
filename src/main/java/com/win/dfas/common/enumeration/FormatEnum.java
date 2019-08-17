@@ -1,5 +1,5 @@
 /****************************************************
- * 创建人：     @author hechengcheng    
+ * 创建人：     @author hechengcheng
  * 创建时间: 2019年8月5日/下午5:11:52
  * 项目名称：  dfas-common-util
  * 文件名称: FormatEnum.java
@@ -7,17 +7,17 @@
  *
  * All rights Reserved, Designed By 投资交易团队
  * @Copyright:2016-2019
- * 
+ *
  ********************************************************/
 package com.win.dfas.common.enumeration;
 
-/**   
- * 包名称： com.win.dfas.common.enumeration 
- * 类名称：FormatEnum 
+/**
+ * 包名称： com.win.dfas.common.enumeration
+ * 类名称：FormatEnum
  * 类描述：格式化枚举
- * 创建人：@author hechengcheng 
+ * 创建人：@author hechengcheng
  * 创建时间：2019年8月5日/下午5:11:52
- *     
+ *
  */
 public enum FormatEnum {
 
@@ -32,8 +32,9 @@ public enum FormatEnum {
 	TRADEDIRECTION_CODE_T_DECLAREPATHNAME("PARAM_TRANSACTION_DIRECTION-%s", "declarePathName", "根据交易方向代码转为申报方向名称"),
 	STOCKHOLDER_CODE_T_NAME("PROD_STOCKHOLDER-%s", "stockholderName", "根据股东代码转为股东名称"),
 	SEAT_CODE_T_NAME("PROD_SEAT-%s", "seatName", "根据席位代码转为席位名称"),
+	PROD_ASSET_UNIT("PROD_ASSET_UNIT-%s", "assetUintName", "根据资产单元No获取资产名称Name"),
 	;
-	
+
 	private String format;
 	private String key;
 	private String desc;
@@ -43,11 +44,11 @@ public enum FormatEnum {
 		this.key = key;
 		this.desc = desc;
 	}
-	
+
 	public String getFormat() {
 		return format;
 	}
-	
+
 	public String getKey() {
 		return key;
 	}
@@ -55,5 +56,5 @@ public enum FormatEnum {
 	public String getDesc() {
 		return desc;
 	}
-	
+
 }
