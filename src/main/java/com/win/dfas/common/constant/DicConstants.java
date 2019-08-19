@@ -1,5 +1,5 @@
 /****************************************************
- * 创建人：     @author hechengcheng    
+ * 创建人：     @author hechengcheng
  * 创建时间: 2019年7月27日/下午3:41:43
  * 项目名称：  dfas-common-util
  * 文件名称: DicConstants.java
@@ -7,21 +7,21 @@
  *
  * All rights Reserved, Designed By 投资交易团队
  * @Copyright:2016-2019
- * 
+ *
  ********************************************************/
 package com.win.dfas.common.constant;
 
 /**
- * 
- * 包名称： com.win.dfas.common.constant 
- * 类名称：DicConstants 
+ *
+ * 包名称： com.win.dfas.common.constant
+ * 类名称：DicConstants
  * 类描述：数据字典常量
- * 创建人：@author hechengcheng 
+ * 创建人：@author hechengcheng
  * 创建时间：2019年8月1日/下午3:03:21
  *
  */
 public final class DicConstants {
-	
+
 	/**
 	 * 公司类别
 	 */
@@ -426,9 +426,13 @@ public final class DicConstants {
 	 * 指令业务分类
 	 */
 	public static final String PDIC_1000295 = "1000295";
-	
+
 	/**
 	 * 网下新债确认状态
 	 */
 	public static final String PDIC_1000296 = "1000296";
+	/**
+	 * 流程类型
+	 */
+	public static final String PDIC_1000297 = "1000297";
 }
