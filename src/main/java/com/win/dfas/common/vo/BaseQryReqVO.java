@@ -34,12 +34,12 @@ public class BaseQryReqVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "请求当前页数")
-	@Min(message = "请求当前页数必须为大于0", value = 1, groups = {ValidationGroup.PageQuery.class})
+	@ApiModelProperty(value = "请求当前页数", notes = "分页查询必传")
+	@Min(message = "请求当前页数必须大于0", value = 1, groups = {ValidationGroup.PageQuery.class})
 	@NotNull(message = "请求当前页数不能为空", groups = {ValidationGroup.PageQuery.class})
 	private Integer reqPageNum;
 	
-	@ApiModelProperty(value = "请求每页大小")
+	@ApiModelProperty(value = "请求每页大小", notes = "分页查询必传")
 	@Min(message = "请求每页大小必须大于0", value = 1, groups = {ValidationGroup.PageQuery.class})
 	@NotNull(message = "请求每页大小不能为空", groups = {ValidationGroup.PageQuery.class})
 	private Integer reqPageSize;
