@@ -431,8 +431,19 @@ public final class DicConstants {
 	 * 网下新债确认状态
 	 */
 	public static final String PDIC_1000296 = "1000296";
+	
 	/**
 	 * 流程类型
 	 */
 	public static final String PDIC_1000297 = "1000297";
+	
+	/**
+	  * 资产单元状态
+	  */
+	 public static final String PDIC_1000298 = "1000298";
+
+	 /**
+	  * 投资组合状态
+	  */
+	 public static final String PDIC_1000299 = "1000299";
 }
