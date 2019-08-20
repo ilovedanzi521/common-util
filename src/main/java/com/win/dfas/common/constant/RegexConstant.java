@@ -31,5 +31,9 @@ public final class RegexConstant {
 	 * YYYY-MM-DD HH:MM:SS格式
 	 */
 	public static final String DATE_TIME = "^[1-9]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])\\s+(20|21|22|23|[0-1]\\d):[0-5]\\d:[0-5]\\d$";
-	
+
+	/**
+	 * 字母、空格、阿拉伯数字、.、_
+	 */
+	public static final String EN_NAME = "^[A-Za-z 0-9._]+$";
 }
