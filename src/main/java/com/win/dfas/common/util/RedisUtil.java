@@ -242,6 +242,19 @@ public final class RedisUtil {
         List<Object> list = redisTemplate.opsForValue().multiGet(keys);
         return list;
     }
+    /**
+     * @Title: multiGet
+     * @Description 批量查询
+     * @param keys
+     * @return java.util.List<java.lang.Object>
+     * @throws
+     * @author wanglei
+     * @Date 2019/8/20/10:05
+     */
+    public static List<Object> multiGet(Set<String> keys){
+        List<Object> list = redisTemplate.opsForValue().multiGet(keys);
+        return list;
+    }
 }
 
 
