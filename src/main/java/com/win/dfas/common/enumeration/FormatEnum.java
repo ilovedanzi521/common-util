@@ -33,6 +33,8 @@ public enum FormatEnum {
 	STOCKHOLDER_CODE_T_NAME("PROD_STOCKHOLDER-%s", "stockholderName", "根据股东代码转为股东名称"),
 	SEAT_CODE_T_NAME("PROD_SEAT-%s", "seatName", "根据席位代码转为席位名称"),
 	PROD_ASSET_UNIT("PROD_ASSET_UNIT-%s", "assetUintName", "根据资产单元No获取资产名称Name"),
+	CASH_ACCOUNT_NO_T_NAME("PROD_CASH_ACCOUNT-%s", "accountName", "根据现金账户序号转为账户名称"),
+	CASH_ACCOUNT_NO_T_CODE("PROD_CASH_ACCOUNT-%s", "accountCode", "根据现金账户序号转为账户账号"),
 	;
 
 	private String format;
