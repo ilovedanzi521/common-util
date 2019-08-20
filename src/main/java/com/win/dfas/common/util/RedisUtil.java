@@ -1,10 +1,6 @@
 package com.win.dfas.common.util;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.dao.DataAccessException;
@@ -26,20 +22,20 @@ import redis.clients.jedis.Jedis;
  * 创建时间：2019/5/28/16:01
  */
 public final class RedisUtil {
-	
+
 	@SuppressWarnings("unchecked")
 	private static RedisTemplate<String, Object> redisTemplate = SpringContextUtil.getBean("redisTemplate", RedisTemplate.class);
-	
+
 	/**
-     * 
+     *
      * 指定缓存失效时间
      * @Title: expire
      * @param key 键
      * @param time 时间(秒)
-     * @return   
-     * @return: boolean   
+     * @return
+     * @return: boolean
      * @throws
-     * @author: hechengcheng 
+     * @author: hechengcheng
      * @Date:  2019年7月31日/下午1:40:17
      */
     public static boolean expire(String key, long time) {
@@ -48,32 +44,32 @@ public final class RedisUtil {
         }
         return true;
     }
-    
+
     /**
-     * 
+     *
      * 根据key获取过期日期
      * @Title: getExpire
      * @param key
-     * @return   
+     * @return
      * @return: Long  时间(秒) 返回0代表为永久有效
      * @throws
-     * @author: hechengcheng 
+     * @author: hechengcheng
      * @Date:  2019年7月31日/下午1:41:33
      */
     public static long getExpire(String key) {
-    	
+
     	return redisTemplate.getExpire(key, TimeUnit.SECONDS);
     }
-    
+
     /**
-     * 
+     *
      * 判断key是否存在
      * @Title: hasKey
      * @param key
-     * @return   
-     * @return: Boolean   
+     * @return
+     * @return: Boolean
      * @throws
-     * @author: hechengcheng 
+     * @author: hechengcheng
      * @Date:  2019年7月31日/下午1:43:16
      */
     public static boolean hasKey(String key) {
@@ -81,14 +77,14 @@ public final class RedisUtil {
     }
 
     /**
-     * 
+     *
      * 删除缓存
      * @Title: del
      * @param key
-     * @return   
-     * @return: long   
+     * @return
+     * @return: long
      * @throws
-     * @author: wanglei 
+     * @author: wanglei
      * @Date:  2019年7月31日/下午8:18:23
      */
     public static long del(String... key) {
@@ -105,24 +101,24 @@ public final class RedisUtil {
         }
         return 0;
     }
-    
+
     /**
-     * 
+     *
      * 根据指定的前缀删除数据
      * @Title: delByPrefix
-     * @param prefix   
-     * @return: void   
+     * @param prefix
+     * @return: void
      * @throws
-     * @author: hechengcheng 
+     * @author: hechengcheng
      * @Date:  2019年7月31日/下午4:59:24
      */
     public static void delByPrefix(String prefix) {
-    	
+
     	Set<String> keySet = redisTemplate.keys(prefix + CommonConstants.ASTERISK);
-    	
+
     	redisTemplate.delete(keySet);
     }
-    
+
 
     /**
      * 普通缓存获取
@@ -149,38 +145,38 @@ public final class RedisUtil {
         }
         return true;
     }
-    
+
     /**
-     * 
+     *
      * 通过管道设置数据
      * @Title: setByPipelined
      * @param map
-     * @param expire   
-     * @return: void   
+     * @param expire
+     * @return: void
      * @throws
-     * @author: hechengcheng 
+     * @author: hechengcheng
      * @Date:  2019年7月31日/下午2:08:08
      */
     public static void setByPipelined(Map<String, Object> map, long expire) {
-    	
+
     	redisTemplate.executePipelined(new RedisCallback<Object>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {
-				
+
 				for (Map.Entry<String, Object> entry : map.entrySet()) {
-					
+
 					if (ObjectUtil.isEmpty(entry.getValue())) {
 						continue;
 					}
-					
+
 					connection.set(entry.getKey().getBytes(), JSON.toJSONBytes(entry.getValue()));
-					
+
 					if (expire > 0) {
 						connection.expire(entry.getKey().getBytes(), expire);
 					}
 				}
-				
+
 				return null;
 			}
 		});
@@ -231,6 +227,20 @@ public final class RedisUtil {
             }
             return Boolean.FALSE;
         });
+    }
+    /**
+     * @Title: matchGet
+     * @Description 模糊匹配获取key对应的列表
+     * @param pattern
+     * @return java.util.List<java.lang.Object>
+     * @throws
+     * @author wanglei
+     * @Date 2019/8/20/9:42
+     */
+    public static List<Object> matchGet(String pattern){
+        Set<String> keys = redisTemplate.keys(pattern);
+        List<Object> list = redisTemplate.opsForValue().multiGet(keys);
+        return list;
     }
 }
 
