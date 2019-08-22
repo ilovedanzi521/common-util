@@ -35,6 +35,10 @@ public class IsAParamValidValidator implements ConstraintValidator<IsAParamValid
 		FormatEnum formatEnum = this.enumValue;
 		String formatKey = formatEnum.getFormat();
 		String strDictKey = String.format(formatKey, this.prefixParam, obj);
+		//如获取值为空,不做校验
+		if(String.valueOf(obj).isEmpty()) {
+			return true;
+		}
 		// 判断缓存里面是否存在此关键字
 		if (RedisUtil.hasKey(strDictKey)) {
 			// 获取redis缓存的值
