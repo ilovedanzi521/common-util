@@ -183,7 +183,7 @@ public final class RedisUtil {
     }
 
     public static final String LOCK_PREFIX = "redis_lock";
-    public static final int LOCK_EXPIRE = 1000*10;
+    public static final int LOCK_EXPIRE = 10;
     private static final Long RELEASE_SUCCESS = 1L;
     private static final String LOCK_SUCCESS = "OK";
     private static final String SET_IF_NOT_EXIST = "NX";
@@ -196,9 +196,8 @@ public final class RedisUtil {
      * @param key key值
      * @return 是否获取到
      */
-    public static boolean lock(String key){
+    public static boolean lock(String key,String uuid){
         String lock = LOCK_PREFIX + key;
-        String uuid = UUID.randomUUID().toString();
         // 利用lambda表达式
         return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
@@ -215,9 +214,8 @@ public final class RedisUtil {
      *
      * @param key
      */
-    public static boolean delete(String key) {
+    public static boolean delete(String key,String uuid) {
         String lock = LOCK_PREFIX + key;
-        String uuid = UUID.randomUUID().toString();
         return redisTemplate.execute((RedisCallback<Boolean>) redisConnection -> {
             Jedis jedis = (Jedis) redisConnection.getNativeConnection();
             Object result = jedis.eval(RELEASE_LOCK_SCRIPT, Collections.singletonList(lock),
@@ -255,6 +253,7 @@ public final class RedisUtil {
         List<Object> list = redisTemplate.opsForValue().multiGet(keys);
         return list;
     }
+
 }
 
 

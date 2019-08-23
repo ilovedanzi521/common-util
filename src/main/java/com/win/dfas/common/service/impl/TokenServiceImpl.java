@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * 包名称：com.win.dfas.common.service.impl
@@ -32,19 +33,20 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public void checkToken(HttpServletRequest request) {
         String token = request.getHeader(CommonConstants.TOKEN_NAME);
-        
+
         // header中不存在token
-        if (StrUtil.isBlank(token)) {        
+        if (StrUtil.isBlank(token)) {
             token = request.getParameter(CommonConstants.TOKEN_NAME);
             // parameter中也不存在token
-            if (StrUtil.isBlank(token)) {    
+            if (StrUtil.isBlank(token)) {
                 throw new WinException("报文不存在token");
             }
         }
-        if (!RedisUtil.lock(token)) {
+        String uuid = UUID.randomUUID().toString();
+        if (!RedisUtil.lock(token,uuid)) {
             throw new WinException("重复操作");
         }
-        if (!RedisUtil.delete(token)) {
+        if (!RedisUtil.delete(token,uuid)) {
             throw new WinException("重复操作");
         }
     }
@@ -52,9 +54,9 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public void setBaseUserInfoByToken(HttpServletRequest request) {
     	JSONObject jsonObject = new JSONObject();
-    	
+
     	jsonObject.put("token", request.getHeader(CommonConstants.TOKEN_NAME));
-    	
+
         WinResponseData winResponseData = userFeign.getInfoFromToken(jsonObject);
         request.setAttribute(CommonConstants.USER_KEY, (BaseUserInfo)winResponseData.getData());
     }
