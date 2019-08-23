@@ -67,4 +67,102 @@ public interface TransDirection {
 			return pathName;
 		}
 	}
+	
+	/**
+	 * 
+	 * 包名称： com.win.dfas.common.enumeration 
+	 * 类名称：FundPathEnum 
+	 * 类描述：交易方向-资金方向枚举
+	 * 创建人：@author hechengcheng 
+	 * 创建时间：2019年8月20日/下午12:08:35
+	 *
+	 */
+	public enum FundPathEnum {
+
+		NOTHING("0", "无"),
+		INCREASE("1", "资金增加"),
+		REDUCE("2", "资金减少"),
+	    ;
+
+	    private String path;
+	    private String pathName;
+
+		private FundPathEnum(String path, String pathName) {
+			this.path = path;
+			this.pathName = pathName;
+		}
+		
+		public String getPath() {
+			return path;
+		}
+
+		public String getPathName() {
+			return pathName;
+		}
+
+		public static String getPathName(String path) {
+			
+			String pathName = null;
+			
+			for(FundPathEnum pathEnum : FundPathEnum.values()) {
+				if (pathEnum.path.equals(path)) {
+					pathName = pathEnum.getPathName();
+					break;
+				}
+			}
+			
+			return pathName;
+		}
+	}
+	
+	/**
+	 * 
+	 * 包名称： com.win.dfas.common.enumeration 
+	 * 类名称：SecurityPathEnum 
+	 * 类描述：交易方向-证券方向枚举
+	 * 创建人：@author hechengcheng 
+	 * 创建时间：2019年8月20日/下午12:08:35
+	 *
+	 */
+	public enum SecurityPathEnum {
+
+		NOTHING("0", "无"),
+		INCREASE("1", "证券增加"),
+		REDUCE("2", "证券减少"),
+		FROZEN("3", "证券冻结"),
+		THAW("4", "证券解冻"),
+		PLEDGE("5", "证券质押"),
+		RELEASE("6", "证券解押"),
+	    ;
+
+	    private String path;
+	    private String pathName;
+
+		private SecurityPathEnum(String path, String pathName) {
+			this.path = path;
+			this.pathName = pathName;
+		}
+		
+		public String getPath() {
+			return path;
+		}
+
+		public String getPathName() {
+			return pathName;
+		}
+
+		public static String getPathName(String path) {
+			
+			String pathName = null;
+			
+			for(SecurityPathEnum pathEnum : SecurityPathEnum.values()) {
+				if (pathEnum.path.equals(path)) {
+					pathName = pathEnum.getPathName();
+					break;
+				}
+			}
+			
+			return pathName;
+		}
+	}
 }
