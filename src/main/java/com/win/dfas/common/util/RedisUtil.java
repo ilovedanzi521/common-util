@@ -253,7 +253,10 @@ public final class RedisUtil {
         List<Object> list = redisTemplate.opsForValue().multiGet(keys);
         return list;
     }
-
+    public static Long incr(String key){
+        Long value = redisTemplate.opsForValue().increment(key);
+        return value;
+    }
 }
 
 
