@@ -35,6 +35,7 @@ public enum FormatEnum {
 	PROD_ASSET_UNIT("PROD_ASSET_UNIT-%s", "assetUnitName", "根据资产单元No获取资产名称Name"),
 	CASH_ACCOUNT_NO_T_NAME("PROD_CASH_ACCOUNT-%s", "accountName", "根据现金账户序号转为账户名称"),
 	CASH_ACCOUNT_NO_T_CODE("PROD_CASH_ACCOUNT-%s", "accountCode", "根据现金账户序号转为账户账号"),
+	CURRENCY_CODE_T_CODE("PARAM_CURRENCY-%s", "currencyName", "根据币种代码转为币种名称"),
 	;
 
 	private String format;
