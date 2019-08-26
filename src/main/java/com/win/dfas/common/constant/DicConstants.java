@@ -446,4 +446,39 @@ public final class DicConstants {
 	  * 投资组合状态
 	  */
 	 public static final String PDIC_1000299 = "1000299";
+	 
+	 /**
+	  * 质押券类型
+	  */
+	 public static final String PDIC_1000300 = "1000300";
+
+	 /**
+	  * 费用类型
+	  */
+	 public static final String PDIC_1000301 = "1000301";
+
+	 /**
+	  * 核算方式
+	  */
+	 public static final String PDIC_1000302 = "1000302";
+
+	 /**
+	  * 费用方向
+	  */
+	 public static final String PDIC_1000303 = "1000303";
+
+	 /**
+	  * 计算时机
+	  */
+	 public static final String PDIC_1000304 = "1000304";
+
+	 /**
+	  * 费用状态
+	  */
+	 public static final String PDIC_1000305 = "1000305";
+
+	 /**
+	  * 费用状态
+	  */
+	 public static final String PDIC_1000306 = "1000306";
 }

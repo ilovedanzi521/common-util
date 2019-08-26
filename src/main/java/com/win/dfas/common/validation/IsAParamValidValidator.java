@@ -3,6 +3,7 @@ package com.win.dfas.common.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.win.dfas.common.enumeration.FormatEnum;
 import com.win.dfas.common.util.RedisUtil;
 
@@ -36,7 +37,7 @@ public class IsAParamValidValidator implements ConstraintValidator<IsAParamValid
 		String formatKey = formatEnum.getFormat();
 		String strDictKey = String.format(formatKey, this.prefixParam, obj);
 		//如获取值为空,不做校验
-		if(String.valueOf(obj).isEmpty()) {
+		if(ObjectUtil.isEmpty(obj)) {
 			return true;
 		}
 		// 判断缓存里面是否存在此关键字
