@@ -12,7 +12,7 @@
 
 package com.win.dfas.common.config;
 
-import com.win.dfas.common.annotation.RedisLockAnnotation;
+import com.win.dfas.common.annotation.DfasLock;
 import com.win.dfas.common.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -36,9 +36,9 @@ import java.util.UUID;
 @Slf4j
 public class RedisLockAspectUtils {
 
-    @Around("@annotation(redisLock)")
-    public Object redisLockTest(ProceedingJoinPoint point, RedisLockAnnotation redisLock) {
-        String key = redisLock.redisKey();
+    @Around("@annotation(lock)")
+    public Object redisLockTest(ProceedingJoinPoint point, DfasLock lock) {
+        String key = lock.key();
         boolean flag = false;
         String uuid = UUID.randomUUID().toString();
         try {

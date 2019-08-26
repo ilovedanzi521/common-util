@@ -17,6 +17,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RedisLockAnnotation {
-    String redisKey();
+public @interface DfasLock {
+    String key();
 }
