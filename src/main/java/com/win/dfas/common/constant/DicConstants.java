@@ -481,4 +481,14 @@ public final class DicConstants {
 	  * 费用状态
 	  */
 	 public static final String PDIC_1000306 = "1000306";
+	 
+	/**
+	 * 保证品类型
+	 */
+	public static final String PDIC_1000311 = "1000311";
+	
+	/**
+	 * 保证品冻结状态
+	 */
+	public static final String PDIC_1000312 = "1000312";
 }
