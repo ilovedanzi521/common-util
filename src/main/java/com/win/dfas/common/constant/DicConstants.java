@@ -482,13 +482,28 @@ public final class DicConstants {
 	  */
 	 public static final String PDIC_1000306 = "1000306";
 	 
-	/**
-	 * 保证品类型
-	 */
-	public static final String PDIC_1000311 = "1000311";
+	 /**
+	  * 保证品类型
+	  */
+	 public static final String PDIC_1000311 = "1000311";
 	
-	/**
-	 * 保证品冻结状态
-	 */
-	public static final String PDIC_1000312 = "1000312";
+	 /**
+	  * 保证品冻结状态
+	  */
+	 public static final String PDIC_1000312 = "1000312";
+
+	 /**
+	  * 沪深业务-价格模式
+	  */
+	 public static final String PDIC_1000313 = "1000313";
+
+	 /**
+	  * 沪深业务-目标模式
+	  */
+	 public static final String PDIC_1000314 = "1000314";
+
+	 /**
+	  * 沪深业务-操作级别
+	  */
+	 public static final String PDIC_1000315 = "1000315";
 }
