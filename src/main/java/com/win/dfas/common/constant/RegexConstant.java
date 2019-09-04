@@ -35,5 +35,5 @@ public final class RegexConstant {
 	/**
 	 * 字母、空格、阿拉伯数字、.、_
 	 */
-	public static final String EN_NAME = "^[A-Za-z 0-9._]+$";
+	public static final String EN_NAME = "^[A-Za-z 0-9._]?$";
 }
