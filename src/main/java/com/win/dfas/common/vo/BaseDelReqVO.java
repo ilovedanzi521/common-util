@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.win.dfas.common.validation.ValidationGroup;
 
@@ -34,12 +35,12 @@ public class BaseDelReqVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@NotEmpty(groups = {ValidationGroup.Delete.class})
-	@ApiModelProperty(value = "主键ID", notes = "根据ID删除必传")
+	@NotNull(message = "ID不能为空", groups = {ValidationGroup.Delete.class})
+	@ApiModelProperty(value = "主键ID", example = "单条删除必传")
 	private Long id;
 	
-	@NotEmpty(groups = {ValidationGroup.BatchDelete.class})
-	@ApiModelProperty(value = "主键ID", notes = "根据IDS批量删除必传")
+	@NotEmpty(message = "IDS不能为空", groups = {ValidationGroup.BatchDelete.class})
+	@ApiModelProperty(value = "主键ID", example = "批量删除必传")
 	private List<Long> ids;
 
 }

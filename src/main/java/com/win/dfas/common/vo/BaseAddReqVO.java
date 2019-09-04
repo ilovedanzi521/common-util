@@ -13,6 +13,8 @@ package com.win.dfas.common.vo;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
 /**   
  * 包名称： com.win.dfas.common.vo 
  * 类名称：BaseAddReqVO 
@@ -21,6 +23,7 @@ import java.io.Serializable;
  * 创建时间：2019年8月15日/下午6:50:37
  *     
  */
+@Data
 public class BaseAddReqVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
