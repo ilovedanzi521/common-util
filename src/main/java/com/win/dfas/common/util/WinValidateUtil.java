@@ -69,7 +69,7 @@ public final class WinValidateUtil {
 	 */
 	public static String validateMsg(Object object, Class<?>... groups) {
 		
-		Set<ConstraintViolation<Object>> set = validator.validate(object);
+		Set<ConstraintViolation<Object>> set = validator.validate(object, groups);
 		
 		if (CollectionUtil.isEmpty(set)) {
 			return null;
