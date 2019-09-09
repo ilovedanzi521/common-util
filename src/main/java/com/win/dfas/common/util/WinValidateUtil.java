@@ -48,7 +48,7 @@ public final class WinValidateUtil {
 	 */
 	public static void validate(Object object, Class<?>... groups) {
 		
-		String errorMsg = validateMsg(object);
+		String errorMsg = validateMsg(object, groups);
 		
 		if (StrUtil.isNotEmpty(errorMsg)) {
 			throw new WinException(errorMsg);
