@@ -37,6 +37,9 @@ public enum FormatEnum {
 	CASH_ACCOUNT_NO_T_NAME("PROD_CASH_ACCOUNT-%s", "accountName", "根据现金账户序号转为账户名称"),
 	CASH_ACCOUNT_NO_T_CODE("PROD_CASH_ACCOUNT-%s", "accountCode", "根据现金账户序号转为账户账号"),
 	CURRENCY_CODE_T_CODE("PARAM_CURRENCY-%s", "currencyName", "根据币种代码转为币种名称"),
+	FUND_NO_T_ESCROW_ACCOUNT_CODE("PROD_ESCROW_ACCOUNT-%s", "escrowAccountCode", "根据产品代码转为托管账户账号"),
+	FUND_NO_T_ESCROW_ACCOUNT_OPEN_BANK("PROD_ESCROW_ACCOUNT-%s", "escrowOpenBank", "根据产品代码转为托管账户开户行"),
+	FUND_NO_T_ESCROW_ACCOUNT_NAME("PROD_ESCROW_ACCOUNT-%s", "escrowAccountName", "根据产品代码转为托管账户名称"),
 	;
 
 	private String format;

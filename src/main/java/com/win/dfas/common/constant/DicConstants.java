@@ -483,6 +483,11 @@ public final class DicConstants {
 	 public static final String PDIC_1000306 = "1000306";
 	 
 	 /**
+	  * 交收状态
+	  */
+	 public static final String PDIC_1000310 = "1000310";
+	 
+	 /**
 	  * 保证品类型
 	  */
 	 public static final String PDIC_1000311 = "1000311";
