@@ -240,6 +240,10 @@ public class ObjectUtils {
 	 */
 	public static void formatList(List<?> sourceList, Class<?> clazz) {
 		
+		if (CollectionUtil.isEmpty(sourceList) || ObjectUtil.isEmpty(clazz)) {
+			return;
+		}
+		
 		// 获取注解属性
 		Map<Field, Field> annoFieldMap = getWinFormatField(clazz);
 		
