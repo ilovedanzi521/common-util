@@ -278,6 +278,16 @@ public final class DicConstants {
 	public static final String PDIC_1000230 = "1000230";
 
 	/**
+	 * 参与公平交易的交易方向
+	 */
+	public static final String PDIC_1000231 = "1000231";
+
+	/**
+	 * 是否参与公平交易
+	 */
+	public static final String PDIC_1000232 = "1000232";
+
+	/**
 	 * 股东属性
 	 */
 	public static final String PDIC_1000265 = "1000265";
