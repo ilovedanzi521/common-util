@@ -12,16 +12,17 @@
 
 package com.win.dfas.common.config;
 
-import com.win.dfas.common.annotation.DfasLock;
-import com.win.dfas.common.util.RedisUtil;
-import lombok.extern.slf4j.Slf4j;
+import java.util.UUID;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+import com.win.dfas.common.annotation.DfasLock;
+import com.win.dfas.common.util.RedisUtil;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 包名称：com.win.dfas.common.config

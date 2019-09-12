@@ -15,10 +15,14 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.win.dfas.common.constant.CommonConstants;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -34,6 +38,8 @@ import feign.RequestTemplate;
 @Configuration
 public class FeignInterceptor implements RequestInterceptor {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(FeignInterceptor.class);
+	
 	@Override
 	public void apply(RequestTemplate requestTemplate) {
 		
@@ -44,21 +50,28 @@ public class FeignInterceptor implements RequestInterceptor {
 		}
 		
 		HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-
+		
+		
 		Enumeration<String> headerNames = request.getHeaderNames();
 		
 		if (headerNames != null) {
 			while (headerNames.hasMoreElements()) {
 				
 				String key = headerNames.nextElement();
-				Enumeration<String> values = request.getHeaders(key);
 				
-				while (values.hasMoreElements()) {
-					String value = values.nextElement();
-					requestTemplate.header(key, value);
+				if (CommonConstants.USER_KEY.equals(key)) {
+					
+					Enumeration<String> values = request.getHeaders(key);
+					
+					while (values.hasMoreElements()) {
+						String value = values.nextElement();
+						requestTemplate.header(key, value);
+					}
 				}
 			}
 		}
+		
+		LOGGER.info("FeignInterceptor apply, requestTemplate is {}", requestTemplate);
 	}
 
 }

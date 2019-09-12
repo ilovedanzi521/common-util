@@ -37,6 +37,7 @@ import feign.Feign;
 @ConditionalOnClass({ Feign.class })
 public class FeignConfig {
 
+	@SuppressWarnings("unused")
 	private static class FeignRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 		@Override
 		protected boolean isHandler(Class<?> beanType) {
