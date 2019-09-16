@@ -11,7 +11,10 @@
  ********************************************************/
 package com.win.dfas.common.service;
 
+import com.win.dfas.common.entity.SysRedisCache;
 import com.win.dfas.common.vo.SysRedisCacheReqVO;
+
+import java.util.List;
 
 /**   
  * 包名称： com.win.dfas.common.service 
@@ -22,6 +25,15 @@ import com.win.dfas.common.vo.SysRedisCacheReqVO;
  *     
  */
 public interface IRedisCacheService {
+
+	/**
+	 * 查询缓存列表
+	 * @param reqVO 查询参数
+	 * @return java.util.List<com.win.dfas.common.entity.SysRedisCache>
+	 * @author jianshengxiong
+	 * @date  2019/9/16/16:11
+	 */
+	List<SysRedisCache> redisCacheList(SysRedisCacheReqVO reqVO);
 
 	/**
 	 * 

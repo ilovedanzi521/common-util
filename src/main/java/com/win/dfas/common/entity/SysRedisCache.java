@@ -30,6 +30,10 @@ public class SysRedisCache extends BaseEntity {
 	 * 缓存类型
 	 */
 	private String cacheType;
+	/**
+	 * 缓存名称描述
+	 */
+	private String cacheName;
 	
 	/**
 	 * 缓存key字段, 该字段必须包含在cache_sql中
