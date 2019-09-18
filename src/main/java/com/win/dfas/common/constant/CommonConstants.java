@@ -22,6 +22,10 @@ public class CommonConstants {
 	
     public static final String TOKEN_NAME = "Authorization";
     
+    public static final String REQ_SOURCE = "reqSource";
+    
+    public static final String REQ_SEQUENCE = "reqSequence";
+    
     public static final String USER_KEY = "user";
     
     public static final String HORIZONTAL_LINE = "-"; 

@@ -40,23 +40,6 @@ public class BaseReqVO implements Serializable {
 	@ApiModelProperty(value = "主键ID")
 	private Long id;
 	
-	@ApiModelProperty(value = "请求源")
-	private String reqSource;
-	
-	@JsonSerialize(using = LongJsonSerializer.class)
-	@JsonDeserialize(using = LongJsonDeserializer.class)
-	@ApiModelProperty(value = "请求序列")
-	private Long reqSequence;
-	
-	@ApiModelProperty(value = "IP地址")
-	private String ip;
-	
-	@ApiModelProperty(value = "MAC地址")
-	private String mac;
-	
-	@ApiModelProperty(value = "主机名")
-	private String hostName;
-	
 	@JsonSerialize(using = LongJsonSerializer.class)
 	@JsonDeserialize(using = LongJsonDeserializer.class)
 	@ApiModelProperty(value = "请求菜单ID")

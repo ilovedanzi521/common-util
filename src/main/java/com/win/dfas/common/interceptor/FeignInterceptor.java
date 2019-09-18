@@ -59,7 +59,8 @@ public class FeignInterceptor implements RequestInterceptor {
 				
 				String key = headerNames.nextElement();
 				
-				if (CommonConstants.USER_KEY.equals(key)) {
+				if (CommonConstants.USER_KEY.equals(key) || CommonConstants.REQ_SOURCE.equals(key)
+						|| CommonConstants.REQ_SEQUENCE.equals(key)) {
 					
 					Enumeration<String> values = request.getHeaders(key);
 					

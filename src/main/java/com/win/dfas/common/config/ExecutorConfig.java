@@ -11,7 +11,6 @@
  ********************************************************/
 package com.win.dfas.common.config;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.slf4j.Logger;
@@ -40,8 +39,8 @@ public class ExecutorConfig {
 	@Autowired
     private Environment env;
 	
-	@Bean
-	public Executor executor() {
+	@Bean(name = "threadPoolTaskExecutor")
+	public ThreadPoolTaskExecutor executor() {
 		
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		

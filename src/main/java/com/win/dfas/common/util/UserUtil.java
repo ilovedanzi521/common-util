@@ -17,15 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.win.dfas.common.constant.CommonConstants;
 import com.win.dfas.common.entity.BaseUserInfo;
 import com.win.dfas.common.enumeration.EnvEnum;
 import com.win.dfas.common.exception.WinException;
@@ -61,15 +54,8 @@ public class UserUtil {
 		
 		BaseUserInfo baseUserInfo = null;
 		
-		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-		
-		if (requestAttributes == null) {
-			return null;
-		}
-		
-		HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-		
-		String userStr = request.getHeader(CommonConstants.USER_KEY);
+		// 获取用户信息JSON
+		String userStr = RequestUtil.getUserJson();
 		
 		if (StrUtil.isEmpty(userStr)) {
 			if (EnvEnum.DEV.getEnv().equals(SpringContextUtil.getActiveProfile())) {
