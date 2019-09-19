@@ -11,6 +11,7 @@
  ********************************************************/
 package com.win.dfas.common.service;
 
+import com.github.pagehelper.PageInfo;
 import com.win.dfas.common.entity.SysRedisCache;
 import com.win.dfas.common.vo.SysRedisCacheReqVO;
 
@@ -34,6 +35,15 @@ public interface IRedisCacheService {
 	 * @date  2019/9/16/16:11
 	 */
 	List<SysRedisCache> redisCacheList(SysRedisCacheReqVO reqVO);
+
+    /**
+     * 查询缓存分页列表
+     * @param reqVO 查询参数
+     * @return com.github.pagehelper.PageInfo<com.win.dfas.common.entity.SysRedisCache>
+     * @author jianshengxiong
+     * @date  2019/9/19/9:15
+     */
+    PageInfo<SysRedisCache> redisCachePageInfo(SysRedisCacheReqVO reqVO);
 
 	/**
 	 * 

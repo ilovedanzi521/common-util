@@ -38,4 +38,8 @@ public class SysRedisCacheReqVO extends BaseReqVO {
 	 */
 	private List<String> cacheTypeList;
 
+	/**
+	 * 缓存关键字，模糊匹配缓存类型或者缓存名称
+	 */
+	private String key;
 }
