@@ -72,7 +72,7 @@ public class FeignInterceptor implements RequestInterceptor {
 			}
 		}
 		
-		LOGGER.info("FeignInterceptor apply, requestTemplate is {}", requestTemplate);
+		LOGGER.debug("FeignInterceptor apply, requestTemplate is {}", requestTemplate);
 	}
 
 }
