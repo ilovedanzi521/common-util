@@ -333,11 +333,6 @@ public final class DicConstants {
 	public static final String PDIC_1000274 = "1000274";
 
 	/**
-	 * 投资标志
-	 */
-	public static final String PDIC_1000275 = "1000275";
-
-	/**
 	 * 对手方托管行账户停用标志
 	 */
 	public static final String PDIC_1000276 = "1000276";
