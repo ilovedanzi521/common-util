@@ -25,10 +25,11 @@ import com.win.dfas.common.exception.IExceptionEnum;
 public enum CommonExceptionEnum implements IExceptionEnum {
 
 	// 指令管理异常枚举
-	FEIGN_EXCEPTION("100100", "Feign调用异常[%s]"),
-	FORMAT_EXCEPTION("100101", "数据转换异常"),
-	FORMAT_MAX_LEVEL_FIELD("100102", "数据转换最大支持[%s]级属性"),
-	SERVICE_NOT_DEFINED("100103", "服务未定义"),
+	FEIGN_EXCEPTION("C100100", "Feign调用异常[%s]"),
+	FORMAT_EXCEPTION("C100101", "数据转换异常"),
+	FORMAT_MAX_LEVEL_FIELD("C100102", "数据转换最大支持[%s]级属性"),
+	SERVICE_NOT_DEFINED("C100103", "服务未定义"),
+	EXPORT_DATA_IS_NULL("C100104", "导出数据为空"),
 	;
 
 	private String code;

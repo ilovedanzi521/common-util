@@ -108,4 +108,5 @@ public final class RequestUtil {
 		
 		return ((ServletRequestAttributes) requestAttributes).getRequest();
 	}
+	
 }
