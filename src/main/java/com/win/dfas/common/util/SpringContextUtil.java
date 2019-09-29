@@ -17,6 +17,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**   
  * 包名称： com.win.dfas.common.util 
  * 类名称：WinApplicationContextAware 
@@ -80,8 +82,21 @@ public class SpringContextUtil implements ApplicationContextAware {
 	public static Object getBean(String name) {
 		return applicationContext.getBean(name);
 	}
-	
-	
+
+	/**
+	 *
+	 * 获取容器中指定某类型、或实现某接口、或继承某父类所有的 Bean
+	 * @Title: getBeansOfType
+	 * @param type 某类型/父类/接口
+	 * @return
+	 * @return: Map<String, T>
+	 * @throws
+	 * @author: jinxiaolong
+	 * @Date:  2019年9月29日/上午09:26:00
+	 */
+	public static <T> Map<String, T> getBeansOfType(Class<T> type) {
+		return applicationContext.getBeansOfType(type);
+	}
 	
 	/**
 	 * 
