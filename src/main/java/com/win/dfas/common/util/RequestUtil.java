@@ -87,6 +87,25 @@ public final class RequestUtil {
 		
 		return null;
 	}
+	
+	/**
+	 * 
+	 * 获取头部请求菜单ID
+	 * @Title: getReqMenuId
+	 * @return   
+	 * @return: String   
+	 * @throws
+	 * @author: hechengcheng 
+	 * @Date:  2019年9月17日/下午8:01:35
+	 */
+	public static String getReqMenuId() {
+		
+		if (ObjectUtil.isNotEmpty(getRequest())) {
+			return getRequest().getHeader(CommonConstants.REQ_MENU_ID);
+		}
+		
+		return null;
+	}
 
 	/**
 	 * 

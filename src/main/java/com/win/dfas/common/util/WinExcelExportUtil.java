@@ -15,13 +15,10 @@ import java.util.List;
 
 import org.springframework.ui.ModelMap;
 
-import com.win.dfas.common.enumeration.CommonExceptionEnum;
-
 import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.ObjectUtil;
 
 /**   
  * 包名称： com.win.dfas.common.util 
@@ -48,7 +45,7 @@ public final class WinExcelExportUtil {
 	public static void exportExcel(List<?> list, ExportParams exportParams) {
 		
 		if (CollectionUtil.isEmpty(list)) {
-			throw WinExceptionUtil.winException(CommonExceptionEnum.EXPORT_DATA_IS_NULL);
+			return;
 		}
 		
 		ModelMap map = new ModelMap();

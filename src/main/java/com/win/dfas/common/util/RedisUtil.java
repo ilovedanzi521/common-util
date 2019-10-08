@@ -141,7 +141,7 @@ public final class RedisUtil {
         if (time > 0) {
         	redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
         } else {
-        	redisTemplate.opsForValue().set(key, value, 10, TimeUnit.SECONDS);
+        	redisTemplate.opsForValue().set(key, value);
         }
         return true;
     }

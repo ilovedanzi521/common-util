@@ -26,6 +26,8 @@ public class CommonConstants {
     
     public static final String REQ_SEQUENCE = "reqSequence";
     
+    public static final String REQ_MENU_ID = "reqMenuId";
+    
     public static final String USER_KEY = "user";
     
     public static final String HORIZONTAL_LINE = "-"; 
