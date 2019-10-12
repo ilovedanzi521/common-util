@@ -516,4 +516,8 @@ public final class DicConstants {
 	  * 沪深业务-操作级别
 	  */
 	 public static final String PDIC_1000315 = "1000315";
+	/**
+	 * 业务初始化状态
+	 */
+	public static final String PDIC_1000316 = "1000316";
 }
