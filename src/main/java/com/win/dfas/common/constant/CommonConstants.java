@@ -20,6 +20,8 @@ package com.win.dfas.common.constant;
  */
 public class CommonConstants {
 	
+	public static final String ADMIN = "admin";
+	
     public static final String TOKEN_NAME = "Authorization";
     
     public static final String REQ_SOURCE = "reqSource";
