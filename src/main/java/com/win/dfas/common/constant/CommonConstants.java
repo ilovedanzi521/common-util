@@ -43,4 +43,16 @@ public class CommonConstants {
     public static final String TRANSFERRED_DOT = "\\.";
     
     public static final Integer FORMAT_MAX_LEVEL = 3;
+    
+    /**
+     * 代表失败
+     */
+    public static final int FAIL_CODE = -1;
+    
+    /**
+     * 跳过后面执行步骤
+     */
+    public static final int SKIP_CODE = -99;
+    
+    
 }
