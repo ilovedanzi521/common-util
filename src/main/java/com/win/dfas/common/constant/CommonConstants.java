@@ -45,6 +45,11 @@ public class CommonConstants {
     public static final Integer FORMAT_MAX_LEVEL = 3;
     
     /**
+     * 0 代表成功
+     */
+    public static final int SUCCESS_CODE = 0;
+    
+    /**
      * 代表失败
      */
     public static final int FAIL_CODE = -1;
