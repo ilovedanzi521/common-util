@@ -46,7 +46,7 @@ public enum FormatEnum {
 	FUND_NO_T_ESCROW_ACCOUNT_NAME("PROD_ESCROW_ACCOUNT-%s", "escrowAccountName", "根据产品代码转为托管账户名称"),
 	FARE_CODE_T_TYPE("PARAM_STANDARD_FARE-%s", "fareType", "根据费用代码转为费用类别"),
 	RIVAL_NO_T_NAME("PARAM_RIVAL_INFO-%s", "rivalName", "根据对手方序号转为对手方名称"),
-	SECURITY_TYPE_T_NAME("PARAM_SECURINTY_TYPE_INFO-%s", "securityType", "根据证券类型转为证券类型name"),
+	SECURITY_TYPE_T_NAME("PARAM_SECURINTY_TYPE_INFO-%s", "securityTypeName", "根据证券类型转为证券类型name"),
 	;
 
 	private String format;
