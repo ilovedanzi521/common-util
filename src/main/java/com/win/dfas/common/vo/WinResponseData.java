@@ -178,7 +178,7 @@ public class WinResponseData implements Serializable {
 	 * @author: wangkai
 	 * @Date:  2017年11月10日/下午1:26:25
 	 */
-	public static WinResponseData handleWarn(String warnMsg, Object... args) {
+	public static WinResponseData handleWarn(String warnMsg, Object args) {
 		return new WinResponseData(WinRspType.WARN, warnMsg, args);
 	}
 	
@@ -212,7 +212,7 @@ public class WinResponseData implements Serializable {
 	 * @author: hechengcheng 
 	 * @Date:  2019年5月30日/下午2:35:37
 	 */
-	public static WinResponseData handleError(String code, String errorMsg, Object... args) {
+	public static WinResponseData handleError(String code, String errorMsg, Object args) {
 		return new WinResponseData(WinRspType.ERROR, code, errorMsg, args);
 	}
 
@@ -228,7 +228,7 @@ public class WinResponseData implements Serializable {
 	 * @author: wangkai
 	 * @Date:  2017年11月10日/下午1:26:49
 	 */
-	public static WinResponseData handleError(String errorMsg, Object... args) {
+	public static WinResponseData handleError(String errorMsg, Object args) {
 		return new WinResponseData(WinRspType.ERROR, errorMsg, args);
 	}
 
