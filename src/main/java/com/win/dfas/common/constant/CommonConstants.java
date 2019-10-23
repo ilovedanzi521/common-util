@@ -44,6 +44,8 @@ public class CommonConstants {
     
     public static final Integer FORMAT_MAX_LEVEL = 3;
     
+    public static final String REDIS_MESSAGE_TOPIC = "REDIS_MESSAGE_TOPIC";
+    
     /**
      * 0 代表成功
      */

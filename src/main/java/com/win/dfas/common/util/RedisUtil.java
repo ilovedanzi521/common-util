@@ -116,6 +116,22 @@ public final class RedisUtil {
 
     	redisTemplate.delete(keySet);
     }
+    
+    /**
+     * 
+     * 发布消息
+     * @Title: publish
+     * @param channel
+     * @param message   
+     * @return: void   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年10月23日/下午5:36:19
+     */
+    public static void publish(String channel, String message) {
+    	
+    	redisTemplate.convertAndSend(channel, message);
+    }
 
     /**
      * 功能描述 <br>
