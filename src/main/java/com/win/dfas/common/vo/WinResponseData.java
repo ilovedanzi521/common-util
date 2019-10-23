@@ -165,6 +165,22 @@ public class WinResponseData implements Serializable {
 	public static WinResponseData handleSuccess(Object obj) {
 		return new WinResponseData(WinRspType.SUCC, "200", OPERATION_SUCC, obj);
 	}
+	
+	/**
+	 *
+	 * @Title: handleWarn
+	 * @Description: 返回警告消息
+	 * @param: @param warnMsg 内容
+	 * @param: @param args    参数
+	 * @param: @return
+	 * @return: RspData       警告消息
+	 * @throws
+	 * @author: wangkai
+	 * @Date:  2017年11月10日/下午1:26:25
+	 */
+	public static WinResponseData handleWarn(String warnMsg) {
+		return new WinResponseData(WinRspType.WARN, warnMsg);
+	}
 
 	/**
 	 *
