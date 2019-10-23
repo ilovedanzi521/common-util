@@ -1,18 +1,16 @@
 package com.win.dfas.common.util;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
+import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSON;
+import com.win.dfas.common.constant.CommonConstants;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-
-import com.alibaba.fastjson.JSON;
-import com.win.dfas.common.constant.CommonConstants;
-
-import cn.hutool.core.util.ObjectUtil;
 import redis.clients.jedis.Jedis;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 包名称：com.example.redis
@@ -117,6 +115,19 @@ public final class RedisUtil {
     	Set<String> keySet = redisTemplate.keys(prefix + CommonConstants.ASTERISK);
 
     	redisTemplate.delete(keySet);
+    }
+
+    /**
+     * 功能描述 <br>
+     * 查找所有符合给定模式 pattern 的 key
+     *
+     * @author jinxiaolong
+     * @date 2019/10/23 13:39
+     * @param pattern 匹配模式
+     * @return java.util.Set<java.lang.String>
+     */
+    public static Set<String> getKeys(String pattern) {
+        return redisTemplate.keys(pattern);
     }
 
 
