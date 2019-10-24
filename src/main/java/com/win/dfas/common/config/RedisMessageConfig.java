@@ -12,7 +12,11 @@
 package com.win.dfas.common.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -20,6 +24,8 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
 import com.win.dfas.common.enumeration.RedisTopicEnum;
 import com.win.dfas.common.service.impl.RedisMessageReceive;
+
+import cn.hutool.core.util.StrUtil;
 
 /**   
  * 包名称： com.win.dfas.common.config 
@@ -30,6 +36,7 @@ import com.win.dfas.common.service.impl.RedisMessageReceive;
  *     
  */
 @Configuration
+@Conditional(RedisMessageCondition.class)
 public class RedisMessageConfig {
 
 	@Bean
@@ -50,4 +57,23 @@ public class RedisMessageConfig {
 		
         return new MessageListenerAdapter(receive, "cacheParamReceive");
     }
+}
+
+/**
+ * 
+ * 包名称： com.win.dfas.common.config 
+ * 类名称：RedisMessageCondition 
+ * 类描述：条件判断
+ * 创建人：@author hechengcheng 
+ * 创建时间：2019年10月24日/下午2:36:49
+ *
+ */
+class RedisMessageCondition implements Condition {
+
+	@Override
+	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+		
+		return StrUtil.isNotEmpty(context.getEnvironment().getProperty("spring.redis.host")) || StrUtil.isNotEmpty(context.getEnvironment().getProperty("spring.redis.cluster.nodes"));
+	}
+	
 }

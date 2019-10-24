@@ -13,8 +13,10 @@
 
 package com.win.dfas.common.config;
 
-import cn.hutool.core.util.StrUtil;
-import com.zaxxer.hikari.HikariDataSource;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.apache.ibatis.session.LocalCacheScope;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -24,18 +26,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.util.StringUtils;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
+import com.zaxxer.hikari.HikariDataSource;
+
+import cn.hutool.core.util.StrUtil;
 
 
 /**
@@ -49,7 +55,7 @@ import java.sql.SQLException;
  */
 @Configuration
 @MapperScan(basePackages = "com.win.**.dao", sqlSessionFactoryRef = "defaultSqlSessionFactory")
-@ConditionalOnProperty(value="mybatis.datasource.enable")
+@Conditional(MyBatisCondition.class)
 public class MyBatisConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisConfig.class);
@@ -172,4 +178,22 @@ public class MyBatisConfig {
         return new DataSourceTransactionManager(dataSource);
     }
 
+}
+
+/**
+ * 
+ * 包名称： com.win.dfas.common.config 
+ * 类名称：MyBatisCondition 
+ * 类描述：数据库配置判断
+ * 创建人：@author hechengcheng 
+ * 创建时间：2019年10月24日/下午2:45:31
+ *
+ */
+class MyBatisCondition implements Condition {
+
+	@Override
+	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+		return StrUtil.isNotEmpty(context.getEnvironment().getProperty("spring.datasource.url"));
+	}
+	
 }
