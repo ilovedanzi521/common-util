@@ -21,7 +21,9 @@ package com.win.dfas.common.enumeration;
  */
 public enum CacheTypeEnum {
 
-	SYS_USER("SYS_USER", "用户缓存"), 
+	SYS_USER("SYS_USER", "用户缓存"),
+
+	SYS_TRADE_DAY("SYS_TRADE_DAY","系统交易日缓存"),
 	;
 	private String cacheType;
 	private String cacheName;
