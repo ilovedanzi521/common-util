@@ -51,28 +51,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public WinResponseData defaultErrorHandler(HttpServletRequest req, RuntimeException e) {
-    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), getMessage(e));
         return WinResponseData.handleError();
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
     public WinResponseData httpMessageNotReadableExceptionHandler(HttpServletRequest req, RuntimeException e) {
-    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), getMessage(e));
         return WinResponseData.handleError("数据类型或格式异常");
     }
     
     @ExceptionHandler(NumberFormatException.class)
     @ResponseBody
     public WinResponseData numberFormatExceptionHandler(HttpServletRequest req, RuntimeException e) {
-    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), getMessage(e));
         return WinResponseData.handleError(e.getMessage());
     }
     
     @ExceptionHandler(InvalidFormatException.class)
     @ResponseBody
     public WinResponseData invalidFormatExceptionHandler(HttpServletRequest req, RuntimeException e) {
-    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}", req.getRequestURL().toString(), getMessage(e));
         return WinResponseData.handleError(e.getMessage());
     }
     
@@ -80,7 +80,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public WinResponseData userTokenExceptionHandler(HttpServletRequest request, UserAuthException ex) {
     	
-    	LOGGER.error("url = {}, errMsg ={}", request.getRequestURL(), ExceptionUtil.stacktraceToString(ex));
+    	LOGGER.error("url = {}, errMsg ={}", request.getRequestURL(), getMessage(ex));
     	
         return WinResponseData.handleAuth(ex.getMessage());
     }
@@ -103,19 +103,35 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(WinException.class)
     @ResponseBody
     public WinResponseData defaultErrorHandler(HttpServletRequest req,WinException e) {
-    	LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(),ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url={},errormsg={}",req.getRequestURL().toString(), getMessage(e));
         return WinResponseData.handleError(e.getCode(),e.getMsg());
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     public WinResponseData methodArgumentNotValidExceptionHandler(HttpServletRequest req, MethodArgumentNotValidException e) {
-    	LOGGER.error("url = {},errormsg = {}", req.getRequestURL().toString(), ExceptionUtil.stacktraceToString(e));
+    	LOGGER.error("url = {},errormsg = {}", req.getRequestURL().toString(), getMessage(e));
     	
     	List<ObjectError> errorList = e.getBindingResult().getAllErrors();
     	
     	String errorMsg = errorList.stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(";"));
     	
         return WinResponseData.handleError("400", errorMsg);
+    }
+    
+    /**
+     * 
+     * 获取完整的堆栈异常信息
+     * @Title: getMessage
+     * @param throwable
+     * @return   
+     * @return: String   
+     * @throws
+     * @author: hechengcheng 
+     * @Date:  2019年10月26日/上午10:15:29
+     */
+    private static String getMessage(Throwable throwable) {
+    	
+    	return ExceptionUtil.stacktraceToString(throwable, Integer.MAX_VALUE);
     }
 }
