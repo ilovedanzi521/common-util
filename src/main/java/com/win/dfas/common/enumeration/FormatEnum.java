@@ -48,6 +48,7 @@ public enum FormatEnum {
 	RIVAL_NO_T_NAME("PARAM_RIVAL_INFO-%s", "rivalName", "根据对手方序号转为对手方名称"),
 	SECURITY_TYPE_T_NAME("PARAM_SECURINTY_TYPE_INFO-%s", "securityTypeName", "根据证券类型转为证券类型name"),
 	SYS_TRADE_DAY("SYS_TRADE_DAY-%s", "marketCode", "根据证券类型转为证券类型name"),
+	MARKET_CODE_NAME("PARAM_MARKET-%s","marketCode","根据交易市场代码转换为交易市场名称"),
 	;
 
 	private String format;
