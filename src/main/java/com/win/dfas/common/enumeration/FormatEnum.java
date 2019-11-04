@@ -29,6 +29,7 @@ public enum FormatEnum {
     SECURITY_CODE_T_TYPE("PARAM_SECURINTY_BASIC_INFO-%s", "securityType", "根据证券代码转为证券类型"),
     SECURITY_CODE_T_TYPENAME("PARAM_SECURINTY_BASIC_INFO-%s", "securityTypeName", "根据证券代码转为证券类别名称"),
     SECURITY_CODE_T_ASSETTYPENAME("PARAM_SECURINTY_BASIC_INFO-%s", "assetTypeName", "根据证券代码转为证券大类名称"),
+	SECURITY_CODE_T_ASSETTYPE("PARAM_SECURINTY_BASIC_INFO-%s", "assetType", "根据证券代码转为证券大类"),
 	FUND_NO_T_NAME("PROD_FUND_INFO-%s", "fundName", "根据产品序号转为产品名称"),
 	FUND_NO_T_CODE("PROD_FUND_INFO-%s", "fundCode", "根据产品序号转为产品代码"),
 	PORTFOLIO_NO_T_NAME("PROD_PORTFOLIO-%s", "portfolioName", "根据组合序号转为组合名称"),
